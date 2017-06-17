@@ -48,9 +48,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -83,11 +83,51 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>本人一直想搭建个人博客，于是在网上找了资料，自己动手搭建发现并不难。现在，把搭建过程记录下来。</p>
+<p>hexo版本不同，有些配置也会不同。我把我机器配置发出来。</p>
+<p>hexo-v.png</p>
+<p>此教程针对的是Windows系统。</p>
+<p>#配置环境</p>
+<p>##安装Node</p>
+<p>##安装Git</p>
+<h2 id="申请GitHub"><a href="#申请GitHub" class="headerlink" title="申请GitHub"></a>申请GitHub</h2><h2 id="正式安装HEXO"><a href="#正式安装HEXO" class="headerlink" title="正式安装HEXO"></a>正式安装HEXO</h2><p>全局安装hexo, 打开Git 命令，执行如下命令</p>
+<pre><code>$ npm install -g hexo 
+</code></pre><p>这样，安装成功，就可以在全局直接使用hexo命令了。<br>比如，可以使用命令<code>hexo -v</code>查询当前运行的<code>hexo</code>版本.<br>图在一开始，已经发出来了。</p>
+<p>搭建Hexo博客，所需要的配置基本完成。以下是涉及到HEXO的配置了。</p>
+<h1 id="HEXO的配置"><a href="#HEXO的配置" class="headerlink" title="HEXO的配置"></a>HEXO的配置</h1><h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><p>在本地新建一个文件夹，名字和GitHub上的地址名字一样的。比如： <code>weiqinl.github.io</code>。<br>然后，在该文件夹下执行初始化方法：</p>
+<pre><code>$ hexo init
+</code></pre><p>hexo-init.png</p>
+<h2 id="本地启动"><a href="#本地启动" class="headerlink" title="本地启动"></a>本地启动</h2><p>运行下面的命令： </p>
+<pre><code>$ hexo server
+</code></pre><p>表明<code>Hexo Server</code>已经在本地启动了，在浏览器中输入<code>http://localhost:4000/</code>,这个时候可以看到由<code>Hexo</code>搭建的博客，里面有一篇，系统自带的博文<code>Hello World</code>,介绍如何使用<code>Hexo</code>。<br>你可以按<code>Ctril + C</code> 停止<code>Server</code>。</p>
+<h2 id="创建一个新文章"><a href="#创建一个新文章" class="headerlink" title="创建一个新文章"></a>创建一个新文章</h2><p>使用命令<code>hexo new &#39;My New Post&#39;</code>创建一个命名为<code>My-New-Post.md</code>的文件，里面默认标题为<code>My New Post</code>的文章。该文章创建在目录 <code>/source/_posts/</code>下。此时，就可以打开该文件，使用Markdown风格的编辑器来编辑。</p>
+<pre><code>$ hexo new &apos;My New Post&apos;
+INFO  Created: E:\project\weiqinl.github.io\source\_posts\My-New-Post‘.md
+</code></pre><h2 id="生成静态页面"><a href="#生成静态页面" class="headerlink" title="生成静态页面"></a>生成静态页面</h2><p>执行以下命令，将markdown文件生成静态网页。</p>
+<pre><code>$ hexo generate 
+</code></pre><p>该命令执行完成后，会在根目录下生成文件夹<code>public</code>,里面是该站点的相关css和js。</p>
+<h2 id="git部署"><a href="#git部署" class="headerlink" title="git部署"></a>git部署</h2><p>修改_config.yml文件，如下： </p>
+<pre><code># Deployment
+## Docs: https://hexo.io/docs/deployment.html
+deploy:
+  type: git
+  repository: git@github.com:weiqinl/weiqinl.github.io
+  branch: master
+</code></pre><p>执行命令：</p>
+<pre><code>$ hexo deploy
+</code></pre><p>  这里，如果遇到问题：</p>
+<pre><code>$ hexo deploy
+ERROR Deployer not found: git
+</code></pre><p>那么执行命令：</p>
+<pre><code>$ npm install hexo-deployer-git --save
+</code></pre><p>执行成功之后，再次运行命令<code>hexo deploy</code></p>
+<p>此时，博客就算是发布成功了。可以通过地址<code>weiqinl.github.io</code>查看。</p>
+<p>##一些常用命令</p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/06/17/My-New-Post/" data-id="cj41176kq0000ekmcuovfy7kd" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/06/17/My-New-Post/" data-id="cj41g8eei0000j8mcgs8gx0hi" class="article-share-link">Share</a>
       
       
     </footer>
@@ -132,7 +172,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/06/17/hello-world/" data-id="cj41176l60001ekmct8f1p82l" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/06/17/hello-world/" data-id="cj41g8eeo0001j8mcm7abd5eh" class="article-share-link">Share</a>
       
       
     </footer>
@@ -167,7 +207,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
         
@@ -192,7 +232,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 John Doe<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
