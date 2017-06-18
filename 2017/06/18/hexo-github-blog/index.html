@@ -111,18 +111,18 @@
 
 
 
-<meta name="description" content="注意： 此教程针对的是Windows系统。具体讲解了hexo的配置，其他配置只是略带提下。 本人一直想搭建个人博客，于是在网上找了资料，自己动手搭建发现并不难。现在，把搭建过程记录下来。 hexo版本不同，有些配置也会不同。我把我机器配置发出来。 hexo-v.png 配置环境本地机器，需要配置一些基础环境，才能更好的搭建hexo博客。 安装Node下载安装： http://nodejs.cn/d">
+<meta name="description" content="注意： 此教程针对的是Windows系统。具体讲解了hexo的配置，其他配置只是略带提下。 本人一直想搭建个人博客，于是在网上找了资料，自己动手搭建发现并不难。现在，把搭建过程记录下来。 hexo版本不同，有些配置也会不同。我把我机器配置发出来。 hexo-v.png 配置环境本地机器，需要配置一些基础环境，才能更好的搭建hexo博客。">
 <meta name="keywords" content="github">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Windows环境下使用Hexo搭建Github静态博客">
 <meta property="og:url" content="http://yoursite.com/2017/06/18/hexo-github-blog/index.html">
 <meta property="og:site_name" content="weiqinl">
-<meta property="og:description" content="注意： 此教程针对的是Windows系统。具体讲解了hexo的配置，其他配置只是略带提下。 本人一直想搭建个人博客，于是在网上找了资料，自己动手搭建发现并不难。现在，把搭建过程记录下来。 hexo版本不同，有些配置也会不同。我把我机器配置发出来。 hexo-v.png 配置环境本地机器，需要配置一些基础环境，才能更好的搭建hexo博客。 安装Node下载安装： http://nodejs.cn/d">
+<meta property="og:description" content="注意： 此教程针对的是Windows系统。具体讲解了hexo的配置，其他配置只是略带提下。 本人一直想搭建个人博客，于是在网上找了资料，自己动手搭建发现并不难。现在，把搭建过程记录下来。 hexo版本不同，有些配置也会不同。我把我机器配置发出来。 hexo-v.png 配置环境本地机器，需要配置一些基础环境，才能更好的搭建hexo博客。">
 <meta property="og:image" content="c:/Users/Administrator/Desktop/hexo+github.io/hexo-init.png">
-<meta property="og:updated_time" content="2017-06-18T10:42:10.260Z">
+<meta property="og:updated_time" content="2017-06-18T15:19:47.209Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Windows环境下使用Hexo搭建Github静态博客">
-<meta name="twitter:description" content="注意： 此教程针对的是Windows系统。具体讲解了hexo的配置，其他配置只是略带提下。 本人一直想搭建个人博客，于是在网上找了资料，自己动手搭建发现并不难。现在，把搭建过程记录下来。 hexo版本不同，有些配置也会不同。我把我机器配置发出来。 hexo-v.png 配置环境本地机器，需要配置一些基础环境，才能更好的搭建hexo博客。 安装Node下载安装： http://nodejs.cn/d">
+<meta name="twitter:description" content="注意： 此教程针对的是Windows系统。具体讲解了hexo的配置，其他配置只是略带提下。 本人一直想搭建个人博客，于是在网上找了资料，自己动手搭建发现并不难。现在，把搭建过程记录下来。 hexo版本不同，有些配置也会不同。我把我机器配置发出来。 hexo-v.png 配置环境本地机器，需要配置一些基础环境，才能更好的搭建hexo博客。">
 <meta name="twitter:image" content="c:/Users/Administrator/Desktop/hexo+github.io/hexo-init.png">
 
 
@@ -159,23 +159,6 @@
 
   <title>Windows环境下使用Hexo搭建Github静态博客 | weiqinl</title>
   
-<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '',
-      xfbml      : true,
-      version    : 'v2.6'
-    });
-  };
-
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "//connect.facebook.net/zh_Hans/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-</script>
 
 
 
@@ -183,6 +166,14 @@
 
 
 
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=62652408";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
 
 
 
@@ -362,8 +353,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/06/18/hexo-github-blog/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count fb-comments-count" data-href="http://yoursite.com/2017/06/18/hexo-github-blog/" itemprop="commentCount">0</span> comments
+                <a class="cloud-tie-join-count" href="/2017/06/18/hexo-github-blog/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count join-count" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -393,6 +384,7 @@
 <p>hexo版本不同，有些配置也会不同。我把我机器配置发出来。</p>
 <p>hexo-v.png</p>
 <h1 id="配置环境"><a href="#配置环境" class="headerlink" title="配置环境"></a>配置环境</h1><p>本地机器，需要配置一些基础环境，才能更好的搭建hexo博客。</p>
+<a id="more"></a>
 <h2 id="安装Node"><a href="#安装Node" class="headerlink" title="安装Node"></a>安装Node</h2><pre><code>下载安装：
 http://nodejs.cn/download/
 </code></pre><h2 id="安装Git"><a href="#安装Git" class="headerlink" title="安装Git"></a>安装Git</h2><pre><code>https://git-scm.com/
@@ -532,6 +524,12 @@ hexo init #初始化文件夹
 
     <div class="post-spread">
       
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
     </div>
   </div>
 
@@ -543,12 +541,7 @@ hexo init #初始化文件夹
           
   <div class="comments" id="comments">
     
-      <div class="fb-comments"
-           data-href="http://yoursite.com/2017/06/18/hexo-github-blog/"
-           data-numposts="10"
-           data-width="100%"
-           data-colorscheme="light">
-      </div>
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
     
   </div>
 
@@ -796,26 +789,6 @@ hexo init #初始化文件夹
 
   
 
-    
-      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
-    
-
-    
-      <script type="text/javascript">
-        var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2017/06/18/hexo-github-blog/';
-          this.page.identifier = '2017/06/18/hexo-github-blog/';
-          this.page.title = 'Windows环境下使用Hexo搭建Github静态博客';
-        };
-        var d = document, s = d.createElement('script');
-        s.src = 'https://.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', '' + +new Date());
-        (d.head || d.body).appendChild(s);
-      </script>
-    
-
-  
-
 
 
 
@@ -826,18 +799,21 @@ hexo init #初始化文件夹
 
 
   
-
-
-
-
-
+    
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "6f98442731314934bcfc2ae590cfbed7",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
   
 
 
 
 
-
-  
 
 
 
