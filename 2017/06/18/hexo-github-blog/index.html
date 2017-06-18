@@ -159,6 +159,24 @@
 
   <title>Windows环境下使用Hexo搭建Github静态博客 | weiqinl</title>
   
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '',
+      xfbml      : true,
+      version    : 'v2.6'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/zh_Hans/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+
 
 
 
@@ -339,6 +357,16 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/06/18/hexo-github-blog/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count fb-comments-count" data-href="http://yoursite.com/2017/06/18/hexo-github-blog/" itemprop="commentCount">0</span> comments
+                </a>
+              </span>
+            
           
 
           
@@ -514,6 +542,13 @@ hexo init #初始化文件夹
 
           
   <div class="comments" id="comments">
+    
+      <div class="fb-comments"
+           data-href="http://yoursite.com/2017/06/18/hexo-github-blog/"
+           data-numposts="10"
+           data-width="100%"
+           data-colorscheme="light">
+      </div>
     
   </div>
 
@@ -758,6 +793,26 @@ hexo init #初始化文件夹
 
   
 
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/06/18/hexo-github-blog/';
+          this.page.identifier = '2017/06/18/hexo-github-blog/';
+          this.page.title = 'Windows环境下使用Hexo搭建Github静态博客';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
 
   
 
