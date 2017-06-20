@@ -79,8 +79,8 @@ menu_icons:
 
 # Schemes
 #scheme: Muse
-scheme: Mist
-#scheme: Pisces
+#scheme: Mist
+scheme: Pisces
 
 
 # ---------------------------------------------------------------
@@ -302,8 +302,8 @@ han: false
 # Swiftype Search API Key
 #swiftype_key:
 
-# Baidu Analytics ID
-#baidu_analytics:
+# Baidu Analytics ID 百度统计
+baidu_analytics: a8d79552a8bcc5f1dd63d45df196bf5b
 
 # Duoshuo ShortName
 #duoshuo_shortname:
@@ -317,7 +317,7 @@ disqus:
 # Hypercomments
 #hypercomments_id:
 
-# Gentie productKey
+# Gentie productKey  网易云跟帖
 gentie_productKey: 6f98442731314934bcfc2ae590cfbed7
 
 # changyan
@@ -523,7 +523,7 @@ pace: false
 pace_theme: pace-theme-minimal
 
 # Canvas-nest
-canvas_nest: true
+canvas_nest: false
 
 # three_waves
 three_waves: false
