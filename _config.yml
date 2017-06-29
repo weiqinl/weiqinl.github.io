@@ -71,4 +71,4 @@ deploy:
   type: git
   repo: git@github.com:weiqinl/weiqinl.github.io
   branch: master
-  message: "google/百度站点验证，都是通过DNS 域名 CNAME验证"
+  #message: "设置【阅读全文】"

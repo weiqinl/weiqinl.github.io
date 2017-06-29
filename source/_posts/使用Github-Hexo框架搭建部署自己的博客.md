@@ -7,6 +7,9 @@ tags:
 ## 前言
 Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown &#40;或其他渲染引擎 &#41;解析文章，
 在几秒内，即可利用靓丽的主题生成静态网页。
+
+<!-- more -->
+
 ## 安装
 ### 安装前提
 安装 Hexo 相当简单。然而在安装前，您必须检查电脑中是否已安装下列应用程序：  
@@ -17,6 +20,8 @@ Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown &#4
     $ npm install -g hexo-cli
 
 如果您的电脑中尚未安装所需要的程序，请根据以下安装指示完成安装。
+
+
 ### 安装Git
 
 - Windows：下载并安装 [git](https://git-scm.com/download/win).

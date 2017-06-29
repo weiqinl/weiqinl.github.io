@@ -9,6 +9,9 @@ tags: hexo
     $ hexo init [folder]
 
 新建一个网站。如果没有设置 `folder` ，Hexo 默认在目前的文件夹建立网站。
+
+    
+<!-- more -->
 ### new
 
     $ hexo new [layout] <title>
