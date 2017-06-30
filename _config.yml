@@ -71,4 +71,4 @@ deploy:
   type: git
   repo: git@github.com:weiqinl/weiqinl.github.io
   branch: master
-  #message: "设置【阅读全文】"
+  message: "新建文章：Datatables插件1.10.15版本服务器处理模式ajax获取分页数据实例解析"
