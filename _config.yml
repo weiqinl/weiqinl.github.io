@@ -4,7 +4,7 @@
 
 # Site
 title: weiqinl
-subtitle:
+subtitle: web engineer
 description: I can play!!
 author: weiqinl
 language: zh-Hans
@@ -12,7 +12,8 @@ timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://weiqinl.com
+
+url: http://weiqinl.com
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -69,5 +70,6 @@ theme: next
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repository: git@github.com:weiqinl/weiqinl.github.io
-  branch: gh-pages
+  repo: git@github.com:weiqinl/weiqinl.github.io
+  branch: master
+  message: "增加分类和标签页面"
