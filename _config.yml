@@ -72,4 +72,4 @@ deploy:
   type: git
   repo: git@github.com:weiqinl/weiqinl.github.io
   branch: master
-  message: "增加关于页面"
+  message: "增加 css cursor属性的介绍"
