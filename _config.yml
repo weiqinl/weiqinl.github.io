@@ -72,4 +72,4 @@ deploy:
   type: git
   repo: git@github.com:weiqinl/weiqinl.github.io
   branch: master
-  message: "修改多篇文章的tags，使用YAML语法风格"
+  #message: "提交消息，使用默认的格式。如果想查看提交记录，可以看blog分支的commit记录"
