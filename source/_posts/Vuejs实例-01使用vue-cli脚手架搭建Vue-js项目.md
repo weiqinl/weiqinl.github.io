@@ -1,7 +1,7 @@
 ---
 title: Vuejs实例-01使用vue-cli脚手架搭建Vue.js项目
 date: 2017-06-29 10:54:36
-tags: vue
+tags: [vue, vue-cli]
 ---
  
 ## 1. 前言 

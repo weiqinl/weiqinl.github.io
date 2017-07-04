@@ -1,9 +1,7 @@
 ---
 title: Datatables插件1.10.15版本服务器处理模式ajax获取分页数据实例解析
 date: 2017-06-30 14:40:42
-tags:   
-  jquery
-  datatables  
+tags: [jquery, datatables]
 ---
 ## 一、问题描述
  

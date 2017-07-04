@@ -1,7 +1,7 @@
 ---
 title: 使用Github+Hexo框架搭建部署自己的博客
 date: 2017-06-21 14:05:48
-tags:
+tags: [github, hexo, blog]
 ---
 
 ## 前言

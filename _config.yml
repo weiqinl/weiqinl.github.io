@@ -72,4 +72,4 @@ deploy:
   type: git
   repo: git@github.com:weiqinl/weiqinl.github.io
   branch: master
-  message: "增加 css cursor属性的介绍"
+  message: "修改多篇文章的tags，使用YAML语法风格"

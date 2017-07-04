@@ -1,7 +1,7 @@
 ---
 title: Windows环境下使用Hexo搭建Github静态博客
 date: 2017-06-18 16:28:31
-tags: "github"
+tags: [github, hexo, windows, blog]
 ---
 
 
