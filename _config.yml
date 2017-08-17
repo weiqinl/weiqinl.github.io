@@ -9,7 +9,7 @@ description: I can play!!
 author: weiqinl
 language: zh-Hans
 timezone:
-
+keywords: 前端博客, JavaScript, html, css, jquery, NodeJs, web
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 
