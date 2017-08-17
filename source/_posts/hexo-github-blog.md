@@ -117,7 +117,7 @@ hexo-v.png
 
 
 ##一些常用命令
-
+    hexo new 'My New Post' # 创建一个新文章，名字为'My New Post'
     hexo clean #清除Hexo的缓存和生成的静态页面
     hexo generate #生成静态页面 hexo g
     hexo deploy #部署 hexo d
