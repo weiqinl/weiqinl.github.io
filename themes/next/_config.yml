@@ -32,7 +32,7 @@ copyright: true
 canonical: true
 
 # Change headers hierarchy on site-subtitle (will be main site description) and on all post/pages titles for better SEO-optimization.
-seo: false
+seo: true
 
 # If true, will add site-subtitle to index page, added in main hexo config.
 # subtitle: Subtitle
@@ -448,7 +448,7 @@ tencent_analytics: 62652408
 
 
 # Enable baidu push so that the blog will push the url to baidu automatically which is very helpful for SEO
-baidu_push: false
+baidu_push: true
 
 # Google Calendar
 # Share your recent schedule to others via calendar page
@@ -622,8 +622,8 @@ vendors:
   # https://github.com/ethantw/Han
   han:
 
-#reward_comment: 坚持原创技术分享，您的支持将鼓励我继续创作！
-reward_comment: 功能测试！
+reward_comment: 坚持原创技术分享，您的支持将鼓励我继续创作！
+# reward_comment: 功能测试！
 wechatpay: /images/wechat-reward-image.jpg
 alipay: /images/alipay-reward-image.jpg
 
