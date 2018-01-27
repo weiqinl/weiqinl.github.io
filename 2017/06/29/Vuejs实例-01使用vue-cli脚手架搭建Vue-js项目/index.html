@@ -1,0 +1,929 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="vue,vue-cli," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="weiqinl" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="1. 前言vue-cli 一个简单的构建Vue.js项目的命令行界面 整体过程： $ npm install -g vue-cli  $ vue init webpack vue-admin  $ cd vue-admin  $ npm install  $ npm run dev  后面分步说明。">
+<meta name="keywords" content="vue,vue-cli">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vuejs实例-01使用vue-cli脚手架搭建Vue.js项目">
+<meta property="og:url" content="http://weiqinl.com/2017/06/29/Vuejs实例-01使用vue-cli脚手架搭建Vue-js项目/index.html">
+<meta property="og:site_name" content="weiqinl">
+<meta property="og:description" content="1. 前言vue-cli 一个简单的构建Vue.js项目的命令行界面 整体过程： $ npm install -g vue-cli  $ vue init webpack vue-admin  $ cd vue-admin  $ npm install  $ npm run dev  后面分步说明。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://images2015.cnblogs.com/blog/564792/201705/564792-20170518211531385-7860564.png">
+<meta property="og:image" content="http://images2015.cnblogs.com/blog/564792/201705/564792-20170518211516994-1560191826.png">
+<meta property="og:image" content="http://images2015.cnblogs.com/blog/564792/201705/564792-20170518211446869-690496824.png">
+<meta property="og:image" content="http://images2015.cnblogs.com/blog/564792/201705/564792-20170519101621432-221179883.png">
+<meta property="og:image" content="http://images2015.cnblogs.com/blog/564792/201705/564792-20170518211346853-1070360488.png">
+<meta property="og:image" content="http://images2015.cnblogs.com/blog/564792/201705/564792-20170518211208697-1183076460.png">
+<meta property="og:image" content="http://images2015.cnblogs.com/blog/564792/201705/564792-20170518211307666-440031481.png">
+<meta property="og:image" content="http://images2015.cnblogs.com/blog/564792/201705/564792-20170518211847322-1043427083.png">
+<meta property="og:updated_time" content="2018-01-27T05:45:53.677Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Vuejs实例-01使用vue-cli脚手架搭建Vue.js项目">
+<meta name="twitter:description" content="1. 前言vue-cli 一个简单的构建Vue.js项目的命令行界面 整体过程： $ npm install -g vue-cli  $ vue init webpack vue-admin  $ cd vue-admin  $ npm install  $ npm run dev  后面分步说明。">
+<meta name="twitter:image" content="http://images2015.cnblogs.com/blog/564792/201705/564792-20170518211531385-7860564.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://weiqinl.com/2017/06/29/Vuejs实例-01使用vue-cli脚手架搭建Vue-js项目/"/>
+
+
+
+
+
+  <title>Vuejs实例-01使用vue-cli脚手架搭建Vue.js项目 | weiqinl</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?a8d79552a8bcc5f1dd63d45df196bf5b";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=62652408";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">weiqinl</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">web engineer</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://weiqinl.com/2017/06/29/Vuejs实例-01使用vue-cli脚手架搭建Vue-js项目/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="weiqinl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="weiqinl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Vuejs实例-01使用vue-cli脚手架搭建Vue.js项目</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-29T10:54:36+08:00">
+                2017-06-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a class="cloud-tie-join-count" href="/2017/06/29/Vuejs实例-01使用vue-cli脚手架搭建Vue-js项目/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count join-count" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h2><p><code>vue-cli</code> 一个简单的构建<code>Vue.js</code>项目的命令行界面</p>
+<p>整体过程：</p>
+<pre><code>$ npm install -g vue-cli 
+$ vue init webpack vue-admin 
+$ cd vue-admin 
+$ npm install 
+$ npm run dev 
+</code></pre><p>后面分步说明。<br><a id="more"></a></p>
+<h2 id="2-安装"><a href="#2-安装" class="headerlink" title="2. 安装"></a>2. 安装</h2><p>前提条件，Node.js &gt;=4.x版本，建议使用6.x版本。npm版本 &gt; 3.x<br>全局安装vue-cli</p>
+<pre><code>$ npm install -g vue-cli 
+</code></pre><p><img src="http://images2015.cnblogs.com/blog/564792/201705/564792-20170518211531385-7860564.png" alt="vue-cli-install" title="vue-cli-install"></p>
+<p>…<br><img src="http://images2015.cnblogs.com/blog/564792/201705/564792-20170518211516994-1560191826.png" alt="vue-cli-install" title="vue-cli-install"></p>
+<h2 id="3-使用"><a href="#3-使用" class="headerlink" title="3. 使用"></a>3. 使用</h2><pre><code>$ vue init &lt;template-name&gt; &lt;project-name&gt; 
+</code></pre><p>vue官方提供了多个打包工具版本的模版。我们可以使用<code>vue list</code>命令查看，当前可以使用的模版。</p>
+<pre><code>$ vue list 
+</code></pre><p><img src="http://images2015.cnblogs.com/blog/564792/201705/564792-20170518211446869-690496824.png" alt="vue list" title="vue list"></p>
+<p>我们在这里，使用<code>webpack</code>模版。 功能齐全的<code>webpack</code>&amp; <code>vue-loader</code> 提供热加载、代码检查、单元测试和css分离</p>
+<pre><code>$ vue init webpack vue-element-admin
+</code></pre><p><img src="http://images2015.cnblogs.com/blog/564792/201705/564792-20170519101621432-221179883.png" alt="vue init" title="vue init"></p>
+<p>之后，在<code>E：\project</code>文件夹下面，会有刚初始化的构建的项目<code>vue-element-admin</code></p>
+<p><img src="http://images2015.cnblogs.com/blog/564792/201705/564792-20170518211346853-1070360488.png" alt="project file" title="project file"></p>
+<h2 id="4-运行结果"><a href="#4-运行结果" class="headerlink" title="4. 运行结果"></a>4. 运行结果</h2><p>项目基础结构已经搭建好了，现在来启动它。<br>进入项目文件:</p>
+<pre><code>$ cd vue-element-admin 
+</code></pre><p>安装依赖：</p>
+<p>中国行情原因，直接安装，有时候会失败。我们一般使用npm的淘宝镜像cnpm。<br>先安装cnpm：</p>
+<pre><code>$ npm install -g cnpm --registry=https://registry.npm.taobao.org
+</code></pre><p>之后，使用:</p>
+<pre><code>$ cnpm install 
+</code></pre><p>你直接安装也可以的：</p>
+<pre><code>$ npm install 
+</code></pre><p>运行：</p>
+<pre><code>$ npm run dev
+</code></pre><p><img src="http://images2015.cnblogs.com/blog/564792/201705/564792-20170518211208697-1183076460.png" alt="npm run dev" title="npm run dev"></p>
+<p>启动之后，自动打开默认浏览器 </p>
+<p><img src="http://images2015.cnblogs.com/blog/564792/201705/564792-20170518211307666-440031481.png" alt="admin page" title="主界面"></p>
+<p>之后，就可以进行本地开发，实时预览开发效果。</p>
+<h2 id="5-打包部署"><a href="#5-打包部署" class="headerlink" title="5. 打包部署"></a>5. 打包部署</h2><p>项目开发完成之后，可以使用<code>npm run build</code>进行打包工作</p>
+<pre><code>$ npm run build
+</code></pre><p>打包完成之后，会生成<code>dist</code>文件夹，项目上线时候，只需要将<code>dist</code>文件夹放到服务器就行了。</p>
+<h2 id="6-项目结构"><a href="#6-项目结构" class="headerlink" title="6. 项目结构"></a>6. 项目结构</h2><p><img src="http://images2015.cnblogs.com/blog/564792/201705/564792-20170518211847322-1043427083.png" alt="项目结构" title="项目结构"></p>
+<pre><code>vue-element-admin:             项目名称 
+|   .babelrc                   babel的配置文件 
+|   .editorconfig              编辑器的配置文件 
+|   .gitignore                 git的忽略文件 
+|   .postcssrc.js              编译css的工具 
+|   index.html                 网站主页 
+|   package.json               项目依赖哪些包的文件 
+|   README.md                  说明文档 
+|  
++---build                      构建的配置文件夹 
+|       build.js               项目构建配置入口
+|       check-versions.js
+|       dev-client.js
+|       dev-server.js
+|       utils.js
+|       vue-loader.conf.js
+|       webpack.base.conf.js
+|       webpack.dev.conf.js
+|       webpack.prod.conf.js
+|       webpack.test.conf.js
+|      
++---config                      整体的配置文件夹
+|       dev.env.js
+|       index.js                配置文件入口
+|       prod.env.js
+|       test.env.js
+|      
++---src                         源文件夹
+|   |   App.vue                 布局组件
+|   |   main.js                 入口文件
+|   |  
+|   +---assets                  静态文件夹
+|   |       logo.png
+|   |      
+|   +---components              组件文件夹
+|   |       Hello.vue           单个组件
+|   |      
+|   \---router                  路由文件夹
+|           index.js            路由主页
+|          
++---static                      静态文件夹
+|       .gitkeep                空文件（Git本身不允许全空目录提交至版本库，一个办法是在目录下创建一个文件，取名为.gitkeep是习惯用法）
+|      
+\---test                        测试文件夹
+</code></pre><h2 id="7-总结"><a href="#7-总结" class="headerlink" title="7. 总结"></a>7. 总结</h2><p>  万事开头难，前期项目搭建可能会遇到一些问题，冷静分析慢慢都能解决的。</p>
+<h2 id="8-项目源码"><a href="#8-项目源码" class="headerlink" title="8. 项目源码"></a>8. 项目源码</h2><p><a href="http://www.cnblogs.com/weiqinl/p/6873761.html" target="_blank" rel="noopener">Vuejs实例-Vuejs2.0全家桶结合ELementUI制作后台管理系统</a><br><a href="https://github.com/weiqinl/vue-element-admin" target="_blank" rel="noopener">git项目源码</a></p>
+<p>项目首发于博客园：<a href="http://www.cnblogs.com/weiqinl/p/6875645.html" target="_blank" rel="noopener">Vuejs实例-01使用vue-cli脚手架搭建Vue.js项目</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat-reward-image.jpg" alt="weiqinl WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay-reward-image.jpg" alt="weiqinl Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/vue/" rel="tag"># vue</a>
+          
+            <a href="/tags/vue-cli/" rel="tag"># vue-cli</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/21/使用Github-Hexo框架搭建部署自己的博客/" rel="next" title="使用Github+Hexo框架搭建部署自己的博客">
+                <i class="fa fa-chevron-left"></i> 使用Github+Hexo框架搭建部署自己的博客
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/30/Datatables插件1-10-15版本服务器处理模式ajax获取分页数据实例解析/" rel="prev" title="Datatables插件1.10.15版本服务器处理模式ajax获取分页数据实例解析">
+                Datatables插件1.10.15版本服务器处理模式ajax获取分页数据实例解析 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="weiqinl" />
+          <p class="site-author-name" itemprop="name">weiqinl</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/weiqinl" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.cnblogs.com/weiqinl" target="_blank" title="cnblogs">
+                  
+                    <i class="fa fa-fw fa-cnblogs"></i>
+                  
+                  cnblogs
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-前言"><span class="nav-number">1.</span> <span class="nav-text">1. 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-安装"><span class="nav-number">2.</span> <span class="nav-text">2. 安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-使用"><span class="nav-number">3.</span> <span class="nav-text">3. 使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-运行结果"><span class="nav-number">4.</span> <span class="nav-text">4. 运行结果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-打包部署"><span class="nav-number">5.</span> <span class="nav-text">5. 打包部署</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-项目结构"><span class="nav-number">6.</span> <span class="nav-text">6. 项目结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-总结"><span class="nav-number">7.</span> <span class="nav-text">7. 总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-项目源码"><span class="nav-number">8.</span> <span class="nav-text">8. 项目源码</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2017 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">weiqinl</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+    
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "6f98442731314934bcfc2ae590cfbed7",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

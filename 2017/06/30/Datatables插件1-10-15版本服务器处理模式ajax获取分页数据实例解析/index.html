@@ -1,0 +1,862 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="jquery,datatables," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="weiqinl" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="一、问题描述前端需要使用表格来展示数据，找了一些插件，最后确定使用dataTables组件来做。 后端的分页接口已经写好了，不能修改。接口需要传入页码(pageNumber)和页面显示数据条数(pageSize)，显示相应的数据。">
+<meta name="keywords" content="jquery,datatables">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Datatables插件1.10.15版本服务器处理模式ajax获取分页数据实例解析">
+<meta property="og:url" content="http://weiqinl.com/2017/06/30/Datatables插件1-10-15版本服务器处理模式ajax获取分页数据实例解析/index.html">
+<meta property="og:site_name" content="weiqinl">
+<meta property="og:description" content="一、问题描述前端需要使用表格来展示数据，找了一些插件，最后确定使用dataTables组件来做。 后端的分页接口已经写好了，不能修改。接口需要传入页码(pageNumber)和页面显示数据条数(pageSize)，显示相应的数据。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://images2015.cnblogs.com/blog/564792/201706/564792-20170630143559118-923358726.png">
+<meta property="og:image" content="http://images2015.cnblogs.com/blog/564792/201706/564792-20170630143543399-2105630772.png">
+<meta property="og:updated_time" content="2018-01-27T05:45:53.676Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Datatables插件1.10.15版本服务器处理模式ajax获取分页数据实例解析">
+<meta name="twitter:description" content="一、问题描述前端需要使用表格来展示数据，找了一些插件，最后确定使用dataTables组件来做。 后端的分页接口已经写好了，不能修改。接口需要传入页码(pageNumber)和页面显示数据条数(pageSize)，显示相应的数据。">
+<meta name="twitter:image" content="http://images2015.cnblogs.com/blog/564792/201706/564792-20170630143559118-923358726.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://weiqinl.com/2017/06/30/Datatables插件1-10-15版本服务器处理模式ajax获取分页数据实例解析/"/>
+
+
+
+
+
+  <title>Datatables插件1.10.15版本服务器处理模式ajax获取分页数据实例解析 | weiqinl</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?a8d79552a8bcc5f1dd63d45df196bf5b";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=62652408";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">weiqinl</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">web engineer</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://weiqinl.com/2017/06/30/Datatables插件1-10-15版本服务器处理模式ajax获取分页数据实例解析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="weiqinl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="weiqinl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Datatables插件1.10.15版本服务器处理模式ajax获取分页数据实例解析</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-30T14:40:42+08:00">
+                2017-06-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a class="cloud-tie-join-count" href="/2017/06/30/Datatables插件1-10-15版本服务器处理模式ajax获取分页数据实例解析/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count join-count" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="一、问题描述"><a href="#一、问题描述" class="headerlink" title="一、问题描述"></a>一、问题描述</h2><p>前端需要使用表格来展示数据，找了一些插件，最后确定使用dataTables组件来做。</p>
+<p>后端的分页接口已经写好了，不能修改。接口需要传入页码(pageNumber)和页面显示数据条数(pageSize)，显示相应的数据。</p>
+<a id="more"></a>
+<h2 id="二、分析"><a href="#二、分析" class="headerlink" title="二、分析"></a>二、分析</h2><p>先来分析下分页实现。</p>
+<p><strong>一是后端分页： 这种情况，请求的数据，后端返回的数据格式都按着官网来编码，很容易实现，在官网上有示例，不多说明。</strong><br><strong>二是前端分页： 前端分页也是支持的，不过需要一次把所有数据都获取到才可以。</strong></p>
+<p>看到这里，问题来了。由于后端在目前的情况下是更改不了，只能在前端实现。但是，现在 又不满足前端分页的条件 ：</p>
+<p>一次性获取所有数据（现在后端数据接口只能返回相应页码的数据）。</p>
+<p>介于目前的情况，获取的数据只有一页，没有所有的页码。<br>试试能不能 <strong>伪装一下后端分页的情况，就是开启后端分页，在请求之前，将传入的数据进行重组，在获取到数据后，将返回的数据按照后端分页的数据格式组装一遍。</strong></p>
+<p>经过测试，是可以的。</p>
+<h2 id="三、实现"><a href="#三、实现" class="headerlink" title="三、实现"></a>三、实现</h2><p>通过DataTables配置参数<a href="https://datatables.net/reference/option/ajax" target="_blank" rel="noopener">ajax项</a> 实现的<br>目前最新DataTables的版本是1.10.15版本 ，以下是使用此版本。</p>
+<p>关于ajax详细介绍请看官方说明：<a href="http://www.w3school.com.cn/jquery/ajax_ajax.asp" target="_blank" rel="noopener">中文</a> | <a href="https://api.jquery.com/jquery.ajax/" target="_blank" rel="noopener">英文</a></p>
+<p>DataTables参数ajax接收三种类型的参数：</p>
+<ul>
+<li>*string： 设置获取数据的url</li>
+</ul>
+<ul>
+<li>*object：和 jQuery.ajax 定义类似</li>
+</ul>
+<ul>
+<li>*function：自定义获取数据的功能</li>
+</ul>
+<p>直接上代码吧，都有注释。</p>
+<h3 id="前端页面代码："><a href="#前端页面代码：" class="headerlink" title="前端页面代码："></a>前端页面代码：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line"> </span><br><span class="line">&lt;head&gt;</span><br><span class="line">  &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">  &lt;title&gt;jquery DataTables插件自定义分页ajax实现&lt;/title&gt;</span><br><span class="line">  &lt;link href=&quot;http://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css&quot; rel=&quot;stylesheet&quot; media=&quot;screen&quot;&gt;</span><br><span class="line">  &lt;link href=&quot;http://cdn.bootcss.com/datatables/1.10.11/css/dataTables.bootstrap.min.css&quot; rel=&quot;stylesheet&quot; media=&quot;screen&quot;&gt;</span><br><span class="line">  &lt;link href=&quot;http://cdn.bootcss.com/datatables/1.10.11/css/jquery.dataTables.min.css&quot; rel=&quot;stylesheet&quot; media=&quot;screen&quot;&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line"> </span><br><span class="line">&lt;body&gt;</span><br><span class="line">  &lt;div class=&quot;row-fluid&quot;&gt;</span><br><span class="line">    &lt;h3&gt;JQuery DataTables插件自定义分页Ajax实现&lt;/h3&gt;</span><br><span class="line">    &lt;table id=&quot;example&quot; class=&quot;display table-striped table-bordered table-hover table-condensed&quot; cellspacing=&quot;0&quot; width=&quot;100%&quot;&gt;</span><br><span class="line">      &lt;thead&gt;</span><br><span class="line">        &lt;tr&gt;</span><br><span class="line">          &lt;th&gt;编号&lt;/th&gt;</span><br><span class="line">          &lt;th&gt;姓名&lt;/th&gt;</span><br><span class="line">          &lt;th&gt;性别&lt;/th&gt;</span><br><span class="line">        &lt;/tr&gt;</span><br><span class="line">      &lt;/thead&gt;</span><br><span class="line">    &lt;/table&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">  &lt;!-- jQuery --&gt;</span><br><span class="line">  &lt;script type=&quot;text/javascript&quot; charset=&quot;utf8&quot; src=&quot;http://code.jquery.com/jquery-1.10.2.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">  &lt;!-- DataTables --&gt;</span><br><span class="line">  &lt;script type=&quot;text/javascript&quot; charset=&quot;utf8&quot; src=&quot;http://cdn.datatables.net/1.10.15/js/jquery.dataTables.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">  &lt;script src=&quot;http://cdn.bootcss.com/datatables/1.10.11/js/jquery.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">  &lt;script src=&quot;http://cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">  &lt;script src=&quot;http://cdn.bootcss.com/datatables/1.10.11/js/jquery.dataTables.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">  &lt;script src=&quot;http://cdn.bootcss.com/datatables/1.10.11/js/dataTables.bootstrap.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">  &lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">  $(function() &#123;</span><br><span class="line">    //提示信息</span><br><span class="line">    var lang = &#123;</span><br><span class="line">      &quot;lengthMenu&quot;: &quot;每页 _MENU_  项&quot;,</span><br><span class="line">      &quot;processing&quot;: &quot;处理中...&quot;,</span><br><span class="line">      &quot;zeroRecords&quot;: &quot;没有匹配结果&quot;,</span><br><span class="line">      &quot;info&quot;: &quot;当前显示第 _START_ 到 _END_ 项, 共 _TOTAL_ 项&quot;,</span><br><span class="line">      &quot;infoEmpty&quot;: &quot;暂无数据&quot;,</span><br><span class="line">      &quot;infoFiltered&quot;: &quot;(由 _MAX_ 项结果过滤)&quot;, //当使用搜索功能后，表格主要信息出追加的字符</span><br><span class="line">      &quot;loadingRecords&quot;: &quot;加载中...&quot;,</span><br><span class="line">      &quot;processing&quot;: &quot;处理中...&quot;,</span><br><span class="line">      &quot;search&quot;: &quot;搜索:&quot;,</span><br><span class="line">      &quot;infoPostFix&quot;: &quot;&quot;, //追加到所有其他主要信息字符串之后</span><br><span class="line">      &quot;url&quot;: &quot;&quot;,</span><br><span class="line">      &quot;emptyTable&quot;: &quot;表中数据为空&quot;,</span><br><span class="line">      &quot;infoThousands&quot;: &quot;,&quot;,</span><br><span class="line">      &quot;paginate&quot;: &#123;</span><br><span class="line">        &quot;first&quot;: &quot;首页&quot;,</span><br><span class="line">        &quot;last&quot;: &quot;末页&quot;,</span><br><span class="line">        &quot;next&quot;: &quot;下页&quot;,</span><br><span class="line">        &quot;previous&quot;: &quot;上页&quot;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">    //初始化表格</span><br><span class="line">    var table = $(&quot;#example&quot;).DataTable(&#123;</span><br><span class="line">      language: lang, //提示信息</span><br><span class="line">      stateSave: true, //状态保存，再次加载页面时还原表格状态</span><br><span class="line">      autoWidth: false, //禁用自动调整列宽</span><br><span class="line">      stripeClasses: [&quot;odd&quot;, &quot;even&quot;], //为奇偶行加上样式，兼容不支持CSS伪类的场合</span><br><span class="line">      processing: true, //隐藏加载提示,自行处理</span><br><span class="line">      serverSide: true, //启用服务器端分页</span><br><span class="line">      searching: false, //禁用原生搜索</span><br><span class="line">      orderMulti: false, //启用多列排序</span><br><span class="line">      order: [], //取消默认排序查询,否则复选框一列会出现小箭头</span><br><span class="line">      deferRender: true, //延迟渲染可以提高Datatables的加载速度</span><br><span class="line">      lengthMenu: [</span><br><span class="line">        [10, 25, 50, 100, 300, -1],</span><br><span class="line">        [10, 25, 50, 100, 300, &quot;所有&quot;]</span><br><span class="line">      ], //每页多少项，第一个数组是表示的值，第二个数组用来显示</span><br><span class="line">      renderer: &quot;bootstrap&quot;, //渲染样式：Bootstrap和jquery-ui</span><br><span class="line">      pagingType: &quot;simple_numbers&quot;, //分页样式：simple,simple_numbers,full,full_numbers</span><br><span class="line">      scrollY: 300, //表格的固定高</span><br><span class="line">      scrollCollapse: true, //开启滚动条</span><br><span class="line">      pageLength: 10, //首次加载的数据条数</span><br><span class="line">      columnDefs: [&#123;</span><br><span class="line">       targets: &apos;nosort&apos;, //列的样式名</span><br><span class="line">       orderable: false //包含上样式名‘nosort&apos;的禁止排序</span><br><span class="line">      &#125;],</span><br><span class="line">      //对应列表表头字段</span><br><span class="line">      columns: [&#123;</span><br><span class="line">        &quot;data&quot;: &quot;Id&quot;</span><br><span class="line">      &#125;, &#123;</span><br><span class="line">        &quot;data&quot;: &quot;Name&quot;</span><br><span class="line">      &#125;, &#123;</span><br><span class="line">        &quot;data&quot;: &quot;Sex&quot;</span><br><span class="line">      &#125;],</span><br><span class="line">      ajax: function(data, callback, settings) &#123;</span><br><span class="line">        //封装请求参数</span><br><span class="line">        var param = &#123;&#125;;</span><br><span class="line">        param.limit = data.length; //页面显示记录条数，在页面显示每页显示多少项的时候</span><br><span class="line">        param.start = data.start; //开始的记录序号</span><br><span class="line">        param.page = (data.start / data.length) + 1; //当前页码</span><br><span class="line">        //console.log(param);</span><br><span class="line">        //ajax请求数据</span><br><span class="line">        $.ajax(&#123;</span><br><span class="line">          url: &quot;/hello/list&quot;,</span><br><span class="line">          type: &quot;POST&quot;,</span><br><span class="line">          cache: false, //禁用缓存</span><br><span class="line">          data: param, //传入组装的参数</span><br><span class="line">          dataType: &quot;json&quot;,</span><br><span class="line">          contentType: &apos;application/json;charset=utf-8&apos;,</span><br><span class="line">          beforeSend: function(request) &#123;</span><br><span class="line">            request.setRequestHeader(&quot;token&quot;, localStorage.token);</span><br><span class="line">          &#125;,</span><br><span class="line">          success: function(result) &#123;</span><br><span class="line">            //console.log(result);</span><br><span class="line">            //setTimeout仅为测试延迟效果</span><br><span class="line">            setTimeout(function() &#123;</span><br><span class="line">              //封装返回数据</span><br><span class="line">              var returnData = &#123;&#125;;</span><br><span class="line">              returnData.draw = data.draw; //这里直接自行返回了draw计数器,应该由后台返回</span><br><span class="line">              returnData.recordsTotal = result.total; //返回数据全部记录</span><br><span class="line">              returnData.recordsFiltered = result.total; //后台不实现过滤功能，每次查询均视作全部结果</span><br><span class="line">              returnData.data = result.data; //返回的数据列表</span><br><span class="line">              //console.log(returnData);</span><br><span class="line">              //调用DataTables提供的callback方法，代表数据已封装完成并传回DataTables进行渲染</span><br><span class="line">              //此时的数据需确保正确无误，异常判断应在执行此回调前自行处理完毕</span><br><span class="line">              callback(returnData);</span><br><span class="line">            &#125;, 200);</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;,</span><br><span class="line"> </span><br><span class="line">    &#125;);</span><br><span class="line"> </span><br><span class="line">  &#125;);</span><br><span class="line">  &lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line"> </span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="JSON数据格式"><a href="#JSON数据格式" class="headerlink" title="JSON数据格式:"></a>JSON数据格式:</h3><p><img src="http://images2015.cnblogs.com/blog/564792/201706/564792-20170630143559118-923358726.png" alt=""></p>
+<h3 id="效果图"><a href="#效果图" class="headerlink" title="效果图:"></a>效果图:</h3><p><img src="http://images2015.cnblogs.com/blog/564792/201706/564792-20170630143543399-2105630772.png" alt=""></p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="http://www.jb51.net/article/84751.htm" target="_blank" rel="noopener">jQuery DataTables插件自定义Ajax分页实例解析</a><br><a href="http://www.cnblogs.com/weiqinl/p/7098746.html" target="_blank" rel="noopener">Datatables插件1.10.15版本服务器处理模式ajax获取分页数据实例解析</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat-reward-image.jpg" alt="weiqinl WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay-reward-image.jpg" alt="weiqinl Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/jquery/" rel="tag"># jquery</a>
+          
+            <a href="/tags/datatables/" rel="tag"># datatables</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/29/Vuejs实例-01使用vue-cli脚手架搭建Vue-js项目/" rel="next" title="Vuejs实例-01使用vue-cli脚手架搭建Vue.js项目">
+                <i class="fa fa-chevron-left"></i> Vuejs实例-01使用vue-cli脚手架搭建Vue.js项目
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/07/04/cursor属性-显示的光标的类型-形状-的用法和定义/" rel="prev" title="cursor属性-显示的光标的类型(形状)的用法和定义">
+                cursor属性-显示的光标的类型(形状)的用法和定义 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="weiqinl" />
+          <p class="site-author-name" itemprop="name">weiqinl</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/weiqinl" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.cnblogs.com/weiqinl" target="_blank" title="cnblogs">
+                  
+                    <i class="fa fa-fw fa-cnblogs"></i>
+                  
+                  cnblogs
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、问题描述"><span class="nav-number">1.</span> <span class="nav-text">一、问题描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、分析"><span class="nav-number">2.</span> <span class="nav-text">二、分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、实现"><span class="nav-number">3.</span> <span class="nav-text">三、实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#前端页面代码："><span class="nav-number">3.1.</span> <span class="nav-text">前端页面代码：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JSON数据格式"><span class="nav-number">3.2.</span> <span class="nav-text">JSON数据格式:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#效果图"><span class="nav-number">3.3.</span> <span class="nav-text">效果图:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考链接"><span class="nav-number">4.</span> <span class="nav-text">参考链接</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2017 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">weiqinl</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+    
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "6f98442731314934bcfc2ae590cfbed7",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

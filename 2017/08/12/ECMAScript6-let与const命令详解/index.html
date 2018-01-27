@@ -1,0 +1,987 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="javascript," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="weiqinl" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="前言《ECMAScript入门》是一本开源的JavaScript语言教程，全面介绍ECMAScript6新引入的语法特性。let和const命令，是第一章开始介绍，也是比较基础的知识。我在学习之后，把它总结记录下来，以便自己以后复习查看。以下代码，于Chrome57 DevTools运行 node为6.3版本 先总结 先总结区别，再分别阐述 let 与 const 相同点和区别1：let命令用来声">
+<meta name="keywords" content="javascript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ECMAScript6-let与const命令详解">
+<meta property="og:url" content="http://weiqinl.com/2017/08/12/ECMAScript6-let与const命令详解/index.html">
+<meta property="og:site_name" content="weiqinl">
+<meta property="og:description" content="前言《ECMAScript入门》是一本开源的JavaScript语言教程，全面介绍ECMAScript6新引入的语法特性。let和const命令，是第一章开始介绍，也是比较基础的知识。我在学习之后，把它总结记录下来，以便自己以后复习查看。以下代码，于Chrome57 DevTools运行 node为6.3版本 先总结 先总结区别，再分别阐述 let 与 const 相同点和区别1：let命令用来声">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1808701-f3a757e07cfaec42.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1808701-b40ad1bad6eb2dc8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1808701-11e13d162f5e3a7a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1808701-a556a84c1e41a951.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1808701-5a6f224a1dc3e5b2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1808701-4eb9702e386ba651.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1808701-759e74b94c15487a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1808701-49873f4ad0ada734.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1808701-b73cc279b0d4184e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1808701-078381fe53f0cf35.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1808701-bd84a9111223a679.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1808701-9d7d593750050616.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1808701-103ff020e54d8964.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1808701-3a5e506b1c8b26fe.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1808701-519edc14946bb783.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1808701-fc62f8b9a63d3720.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1808701-c3ba51139ac69619.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1808701-6b01394911253746.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1808701-69e0b945a528bd31.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1808701-ff50e440ab0de95b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1808701-55389e99c599d827.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1808701-e89626346bdfaefd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1808701-63ef326fdc2aa06e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1808701-2c1adffb868fd796.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1808701-60b9f71a77f25a33.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1808701-a0ac032f8df48178.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1808701-c94b2d1e8ca383c6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1808701-5345ea3235c3fab7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1808701-6713c6f28482ea8d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1808701-4b2aa30ee52fad97.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1808701-46e1ae1b8211487c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1808701-2f8aee36ccadb4c2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1808701-f4d82eff1d3b4305.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1808701-69073bbb184afa91.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-01-27T05:45:53.676Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ECMAScript6-let与const命令详解">
+<meta name="twitter:description" content="前言《ECMAScript入门》是一本开源的JavaScript语言教程，全面介绍ECMAScript6新引入的语法特性。let和const命令，是第一章开始介绍，也是比较基础的知识。我在学习之后，把它总结记录下来，以便自己以后复习查看。以下代码，于Chrome57 DevTools运行 node为6.3版本 先总结 先总结区别，再分别阐述 let 与 const 相同点和区别1：let命令用来声">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1808701-f3a757e07cfaec42.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://weiqinl.com/2017/08/12/ECMAScript6-let与const命令详解/"/>
+
+
+
+
+
+  <title>ECMAScript6-let与const命令详解 | weiqinl</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?a8d79552a8bcc5f1dd63d45df196bf5b";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=62652408";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">weiqinl</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">web engineer</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://weiqinl.com/2017/08/12/ECMAScript6-let与const命令详解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="weiqinl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="weiqinl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">ECMAScript6-let与const命令详解</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-12T11:13:52+08:00">
+                2017-08-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a class="cloud-tie-join-count" href="/2017/08/12/ECMAScript6-let与const命令详解/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count join-count" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>《ECMAScript入门》是一本开源的JavaScript语言教程，全面介绍ECMAScript6新引入的语法特性。<br>let和const命令，是第一章开始介绍，也是比较基础的知识。我在学习之后，把它总结记录下来，以便自己以后复习查看。<br><strong>以下代码，于Chrome57 DevTools运行</strong><br> <strong>node为6.3版本</strong></p>
+<h2 id="先总结"><a href="#先总结" class="headerlink" title="先总结"></a>先总结</h2><p> 先总结区别，再分别阐述</p>
+<h3 id="let-与-const-相同点和区别"><a href="#let-与-const-相同点和区别" class="headerlink" title="let 与 const 相同点和区别"></a>let 与 const 相同点和区别</h3><p>1：<code>let</code>命令用来声明变量，用法类似于<code>var</code>，但是所声明的变量。<br>   <code>const</code>声明一个只读的常量，一旦声明，常量的值就不能改变。<br>   <code>const</code>保证的是内存地址不得改动。常量（内存地址保存的是值），复合类型的数据（内存地址保存的是指针）<br>2：两者都不存在变量提升。<br>3：两者都有暂时性死区(TDZ)。<br>4：两者都不允许重复声明。<br>5：两者为JavaScript新增了块级作用域。两者作用域，只在声明所在的块级作用域有效。<br><a id="more"></a></p>
+<h2 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h2><h3 id="let命令介绍"><a href="#let命令介绍" class="headerlink" title="let命令介绍"></a>let命令介绍</h3><p><code>let</code>命令，用来声明变量。它的用法类似于<code>var</code>, 但是所声明的变量，只在<code>let</code>命令所在的代码块内有效。<br>浏览器中的结果 <img src="http://upload-images.jianshu.io/upload_images/1808701-f3a757e07cfaec42.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="let命令"></p>
+<p>上面代码在代码块之中，分别用<code>let</code>和<code>var</code>声明了两个变量。然后在代码块之外调用这两个变量，结果<code>let</code>声明的变量报错，<code>var</code>声明的变量返回了正确的值。这表明，<code>let</code>声明的变量只在它所在的代码块有效。上面代码在代码块之中，分别用<code>let</code>和<code>var</code>声明了两个变量。然后在代码块之外调用这两个变量，结果<code>let</code>声明的变量报错，<code>var</code>声明的变量返回了正确的值。这表明，<code>let</code>声明的变量只在它所在的代码块有效。</p>
+<h3 id="let实用举例"><a href="#let实用举例" class="headerlink" title="let实用举例"></a>let实用举例</h3><p> <code>for</code>循环的计数器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">for (let i =0; i &lt; 10; i++) &#123;&#125;</span><br><span class="line">console.log(i) // ReferenceError: i is not defined</span><br></pre></td></tr></table></figure></p>
+<p> 浏览器中的结果<img src="http://upload-images.jianshu.io/upload_images/1808701-b40ad1bad6eb2dc8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="for循环的计数器"></p>
+<p> 上面代码中，计数器<code>i</code>只在<code>for</code>循环体内有效，在循环体外引用就会报错。</p>
+<p> 下面的代码如果使用<code>var</code>, 最后输出的是<code>10</code>。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var  a  =   [];</span><br><span class="line">for  (var  i  =  0;  i  &lt;  10;  i++)  &#123;</span><br><span class="line">  a[i]  =   function ()  &#123;</span><br><span class="line">    console.log(i);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line">a[6](); // 10</span><br></pre></td></tr></table></figure></p>
+<p>浏览器中的结果 <img src="http://upload-images.jianshu.io/upload_images/1808701-11e13d162f5e3a7a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="var- for循环"></p>
+<p>   上面代码中，变量<code>i</code>是<code>var</code>命令声明的，在全局范围内都有效，所以全局只有一个变量<code>i</code>。每一次循环，变量<code>i</code>的值都会发生改变，而循环内被赋给数组<code>a</code>的函数内部的<code>console.log(i)</code>，里面的<code>i</code>指向的就是全局的<code>i</code>。也就是说，所有数组<code>a</code>的成员里面的<code>i</code>，指向的都是同一个<code>i</code>，导致运行时输出的是最后一轮的<code>i</code>的值，也就是<code>10</code>。</p>
+<p>   如果使用<code>let</code>, 声明的变量仅在<a href="#blockscope">块级作用域</a>内有效，最后输出的是<code>6</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var  a  =   [];</span><br><span class="line">for  (var  i  =  0;  i  &lt;  10;  i++)  &#123;</span><br><span class="line">  a[i]  =   function ()  &#123;</span><br><span class="line">    console.log(i);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line">a[6](); // 6</span><br></pre></td></tr></table></figure>
+<p>浏览器结果<img src="http://upload-images.jianshu.io/upload_images/1808701-a556a84c1e41a951.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="let-for循环"></p>
+<p>上面代码中，变量<code>i</code>是<code>let</code>声明的，当前的<code>i</code>只在本轮循环有效，所以每一次循环的<code>i</code>其实都是一个新的变量，所以最后输出的是<code>6</code>。你可能会问，如果每一轮循环的变量<code>i</code>都是重新声明的，那它怎么知道上一轮循环的值，从而计算出本轮循环的值？这是因为 JavaScript 引擎内部会记住上一轮循环的值，初始化本轮的变量<code>i</code>时，就在上一轮循环的基础上进行计算。</p>
+<p>另外，<code>for</code>循环还有一个特别之处，就是设置循环变量的那部分是一个父作用域，而循环体内部是一个单独的子作用域。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">for (let i = 0; i &lt; 3; i++) &#123;</span><br><span class="line">  let i = &apos;abc&apos;;</span><br><span class="line">  console.log(i);</span><br><span class="line">&#125;</span><br><span class="line">// abc</span><br><span class="line">// abc</span><br><span class="line">// abc</span><br></pre></td></tr></table></figure>
+<p>浏览器结果 <img src="http://upload-images.jianshu.io/upload_images/1808701-5a6f224a1dc3e5b2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="let-for循环-父子作用域"></p>
+<p>上面代码正确运行，输出了3次<code>abc</code>。这表明函数内部的变量<code>i</code>与循环变量<code>i</code>不在同一个作用域，有各自单独的作用域。</p>
+<h2 id="不存在变量提升"><a href="#不存在变量提升" class="headerlink" title="不存在变量提升"></a>不存在变量提升</h2><p><code>var</code>命令会发生<code>变量提升</code>现象，即变量可以在声明之前使用，值为<code>undefined</code>。这种现象多多少少是有些奇怪的，按照一般的逻辑，变量应该在声明语句之后才可以使用。</p>
+<p>为了纠正这种现象，<code>let</code>命令改变了语法行为，它所声明的变量一定要在声明后使用，否则报错。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// var 的情况</span><br><span class="line">console.log(foo); // 输出undefined</span><br><span class="line">var foo = 2;</span><br><span class="line"> </span><br><span class="line">// let 的情况</span><br><span class="line">console.log(bar); // 报错ReferenceError</span><br><span class="line">let bar = 2;</span><br></pre></td></tr></table></figure>
+<p>浏览器结果<img src="http://upload-images.jianshu.io/upload_images/1808701-4eb9702e386ba651.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="不存在变量提升"></p>
+<p>上面代码中，变量<code>foo</code>用<code>var</code>命令声明，会发生变量提升，即脚本开始运行时，变量<code>foo</code>已经存在了，但是没有值，所以会输出<code>undefined</code>。变量<code>bar</code>用<code>let</code>命令声明，不会发生变量提升。这表示在声明它之前，变量<code>bar</code>是不存在的，这时如果用到它，就会抛出一个错误。</p>
+<h2 id="暂时性死区（TDZ）"><a href="#暂时性死区（TDZ）" class="headerlink" title="暂时性死区（TDZ）"></a>暂时性死区（TDZ）</h2><p>只要块级作用域内存在<code>let</code>命令，它所声明的变量就“绑定”（binding）这个区域，不再受外部的影响。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var tmp = 123;</span><br><span class="line"> </span><br><span class="line">if (true) &#123;</span><br><span class="line">  tmp = &apos;abc&apos;; // ReferenceError</span><br><span class="line">  let tmp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>浏览器中的结果<img src="http://upload-images.jianshu.io/upload_images/1808701-759e74b94c15487a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="暂时性死区(TDZ)"></p>
+<p>上面代码中，存在全局变量<code>tmp</code>,但是块级作用域内<code>let</code>又声明了一个局部变量<code>tmp</code>,导致后者绑定这个块级作用域，所以在<code>let</code>声明变量前，对<code>tmp</code>赋值会报错。</p>
+<p>ES6明确规定，如果区块中存在<code>let</code>和<code>const</code>命令，这个区块对这些命令声明的变量，从一开始就形成了封闭作用域。凡是在声明之前就使用这些变量，就会报错。</p>
+<p>总之，在代码块内，使用<code>let</code>命令声明变量之前，该变量都是不可用的。这在语法上，称为“暂时性死区”（temporal dead zone，简称 TDZ）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">if (true) &#123;</span><br><span class="line">  // TDZ开始</span><br><span class="line">  tmp = &apos;abc&apos;; // ReferenceError</span><br><span class="line">  console.log(tmp); // ReferenceError</span><br><span class="line"> </span><br><span class="line">  let tmp; // TDZ结束</span><br><span class="line">  console.log(tmp); // undefined</span><br><span class="line"> </span><br><span class="line">  tmp = 123;</span><br><span class="line">  console.log(tmp); // 123</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>浏览器结果<br><img src="http://upload-images.jianshu.io/upload_images/1808701-49873f4ad0ada734.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="ReferenceError"><br><img src="http://upload-images.jianshu.io/upload_images/1808701-b73cc279b0d4184e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="ReferenceError"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1808701-078381fe53f0cf35.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="正常情况"></p>
+<p>上面代码中，在<code>let</code>命令声明变量<code>tmp</code>之前，都属于变量<code>tmp</code>的“死区”。</p>
+<p>“暂时性死区”也意味着<code>typeof</code>不再是一个百分之百安全的操作。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">typeof x; // ReferenceError</span><br><span class="line">let x;</span><br></pre></td></tr></table></figure>
+<p>浏览器结果<img src="http://upload-images.jianshu.io/upload_images/1808701-bd84a9111223a679.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="typeof不再是一个百分之百安全的操作"></p>
+<p>上面代码中，变量<code>x</code>使用<code>let</code>命令声明，所以在声明之前，都属于<code>x</code>的“死区”，只要用到该变量就会报错。因此，<code>typeof</code>运行时就会抛出一个<code>ReferenceError</code>。</p>
+<p>作为比较，如果一个变量根本没有被声明，使用<code>typeof</code>反而不会报错。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">typeof undeclared_variable // &quot;undefined&quot;</span><br></pre></td></tr></table></figure>
+<p>浏览器结果<img src="http://upload-images.jianshu.io/upload_images/1808701-9d7d593750050616.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="typeof对未声明的变量有用"></p>
+<p>上面代码中，<code>undeclared_variable</code>是一个不存在的变量名，结果返回“undefined”。所以，在没有<code>let</code>之前，<code>typeof</code>运算符是百分之百安全的，永远不会报错。现在这一点不成立了。这样的设计是为了让大家养成良好的编程习惯，变量一定要在声明之后使用，否则就报错。</p>
+<p>有些“死区”比较隐蔽，不太容易发现。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function bar(x = y, y = 2) &#123;</span><br><span class="line">  return [x, y];</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">bar(); // 报错</span><br></pre></td></tr></table></figure>
+<p>浏览器结果<img src="http://upload-images.jianshu.io/upload_images/1808701-103ff020e54d8964.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="函数参数TDZ"></p>
+<p>上面代码中，调用<code>bar</code>函数之所以报错（某些实现可能不报错），是因为参数<code>x</code>默认值等于另一个参数<code>y</code>，而此时<code>y</code>还没有声明，属于”死区“。如果<code>y</code>的默认值是<code>x</code>，就不会报错，因为此时<code>x</code>已经声明了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function bar(x = 2, y = x) &#123;</span><br><span class="line">  return [x, y];</span><br><span class="line">&#125;</span><br><span class="line">bar(); // [2, 2]</span><br></pre></td></tr></table></figure>
+<p>浏览器结果<img src="http://upload-images.jianshu.io/upload_images/1808701-3a5e506b1c8b26fe.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>另外，下面的代码也会报错，与<code>var</code>的行为不同。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 不报错</span><br><span class="line">var x = x;</span><br><span class="line"> </span><br><span class="line">// 报错</span><br><span class="line">let x = x;</span><br><span class="line">// ReferenceError: x is not defined</span><br></pre></td></tr></table></figure></p>
+<p>浏览器结果<img src="http://upload-images.jianshu.io/upload_images/1808701-519edc14946bb783.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="let定义变量的TDZ"></p>
+<p>上面代码报错，也是因为暂时性死区。使用<code>let</code>声明变量时，只要变量在还没有声明完成前使用，就会报错。上面这行就属于这个情况，在变量<code>x</code>的声明语句还没有执行完成前，就去取<code>x</code>的值，导致报错”x 未定义“。</p>
+<p>ES6 规定暂时性死区和<code>let</code>、<code>const</code>语句不出现变量提升，主要是为了减少运行时错误，防止在变量声明前就使用这个变量，从而导致意料之外的行为。这样的错误在 ES5 是很常见的，现在有了这种规定，避免此类错误就很容易了。</p>
+<p>总之，暂时性死区的本质就是，只要一进入当前作用域，所要使用的变量就已经存在了，但是不可获取，只有等到声明变量的那一行代码出现，才可以获取和使用该变量。</p>
+<h2 id="不允许重复声明"><a href="#不允许重复声明" class="headerlink" title="不允许重复声明"></a>不允许重复声明</h2><p><code>let</code>不允许在相同作用域内，重复声明同一个变量。<br>浏览器结果<br><img src="http://upload-images.jianshu.io/upload_images/1808701-fc62f8b9a63d3720.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="let不允许重复声明1"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1808701-c3ba51139ac69619.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="let不允许重复声明2"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1808701-6b01394911253746.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="let不允许重复声明3"></p>
+<p> 因此，不能在函数内部重新声明参数。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function func(arg) &#123;</span><br><span class="line">  let arg; //在chrome浏览器下，不报错。使用node执行，会报错。</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function func(arg) &#123;</span><br><span class="line">  &#123;</span><br><span class="line">    let arg;//在chrome浏览器下，不报错。使用node执行，也不报错。</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>浏览器环境和node执行情况</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1808701-69e0b945a528bd31.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="浏览器环境下执行"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1808701-ff50e440ab0de95b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="node6.3环境下执行"></p>
+<h2 id="块级作用域"><a href="#块级作用域" class="headerlink" title="块级作用域"></a>块级作用域</h2><p>块级作用域，没有返回值。</p>
+<h3 id="为什么需要块级作用域"><a href="#为什么需要块级作用域" class="headerlink" title="为什么需要块级作用域?"></a>为什么需要块级作用域?</h3><p>ES5 只有全局作用域和函数作用域，没有块级作用域，这带来很多不合理的场景。  </p>
+<p>第一种场景，内层变量可能会覆盖外层变量。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var tmp = new Date();</span><br><span class="line"></span><br><span class="line">function f() &#123;</span><br><span class="line">  console.log(tmp);</span><br><span class="line">  if (false) &#123;</span><br><span class="line">    var tmp = &apos;hello world&apos;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">f(); // undefined</span><br></pre></td></tr></table></figure></p>
+<p>浏览器结果<img src="http://upload-images.jianshu.io/upload_images/1808701-55389e99c599d827.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="内层变量可能会覆盖外层变量"></p>
+<p>上面代码的原意是，<code>if</code>代码块的外部使用外层的<code>tmp</code>变量，内部使用内层的<code>tmp</code>变量。但是，函数<code>f</code>执行后，输出结果为<code>undefined</code>，原因在于变量提升，导致内层的<code>tmp</code>变量覆盖了外层的<code>tmp</code>变量。</p>
+<p>第二种场景，用来计数的循环变量泄露为全局变量。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var s = &apos;hello&apos;;</span><br><span class="line"></span><br><span class="line">for (var i = 0; i &lt; s.length; i++) &#123;</span><br><span class="line">  console.log(s[i]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">console.log(i); // 5</span><br></pre></td></tr></table></figure>
+<p>浏览器结果<img src="http://upload-images.jianshu.io/upload_images/1808701-e89626346bdfaefd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="用来计数的循环变量泄露为全局变量"></p>
+<p>上面代码中，变量<code>i</code>只用来控制循环，但是循环结束后，它并没有消失，泄露成了全局变量。</p>
+<h3 id="ES6的块级作用域"><a href="#ES6的块级作用域" class="headerlink" title="ES6的块级作用域"></a>ES6的块级作用域</h3><p><code>let</code>实际上为 JavaScript 新增了块级作用域。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function f1() &#123;</span><br><span class="line">  let n = 5;</span><br><span class="line">  if (true) &#123;</span><br><span class="line">    let n = 10;</span><br><span class="line">  &#125;</span><br><span class="line">  console.log(n); // 5</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>浏览器结果<img src="http://upload-images.jianshu.io/upload_images/1808701-63ef326fdc2aa06e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="let块级作用域"></p>
+<p>上面的函数有两个代码块，都声明了变量<code>n</code>，运行后输出5。这表示外层代码块不受内层代码块的影响。如果两次都使用<code>var</code>定义变量<code>n</code>，最后输出的值才是10。</p>
+<p>浏览器结果<img src="http://upload-images.jianshu.io/upload_images/1808701-2c1adffb868fd796.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="let块级作用域"></p>
+<p>ES6 允许块级作用域的任意嵌套。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;&#123;&#123;&#123;let insane = &apos;Hello World&apos;&#125;&#125;&#125;&#125;&#125;;</span><br></pre></td></tr></table></figure>
+<p>上面代码使用了一个五层的块级作用域。外层作用域无法读取内层作用域的变量。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;&#123;&#123;</span><br><span class="line">  &#123;let insane = &apos;Hello World&apos;&#125;</span><br><span class="line">  console.log(insane); // 报错</span><br><span class="line">&#125;&#125;&#125;&#125;;</span><br></pre></td></tr></table></figure>
+<p>浏览器结果<img src="http://upload-images.jianshu.io/upload_images/1808701-60b9f71a77f25a33.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="let块级作用域"></p>
+<p>内层作用域可以定义外层作用域的同名变量。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;&#123;&#123;</span><br><span class="line">  let insane = &apos;Hello World&apos;;</span><br><span class="line">  &#123;let insane = &apos;Hello World&apos;&#125;</span><br><span class="line">&#125;&#125;&#125;&#125;;</span><br></pre></td></tr></table></figure>
+<p>块级作用域的出现，实际上使得获得广泛应用的立即执行函数表达式（IIFE）不再必要了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// IIFE 写法</span><br><span class="line">(function () &#123;</span><br><span class="line">  var tmp = ...;</span><br><span class="line">  ...</span><br><span class="line">&#125;());</span><br><span class="line"></span><br><span class="line">// 块级作用域写法</span><br><span class="line">&#123;</span><br><span class="line">  let tmp = ...;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="块级作用域与函数声明"><a href="#块级作用域与函数声明" class="headerlink" title="块级作用域与函数声明"></a>块级作用域与函数声明</h3><ul>
+<li>允许在块级作用域内声明函数。</li>
+<li>函数声明类似于<code>var</code>，即会提升到全局作用域或函数作用域的头部。</li>
+<li>同时，函数声明还会提升到所在的块级作用域的头部。</li>
+</ul>
+<h2 id="const命令"><a href="#const命令" class="headerlink" title="const命令"></a>const命令</h2><h3 id="基本用法-1"><a href="#基本用法-1" class="headerlink" title="基本用法"></a>基本用法</h3><p><code>const</code>也是用来声明变量，但是声明的是一个只读的常量。一旦声明，常量的值就不能改变。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">const PI = 3.1415;</span><br><span class="line">PI // 3.1415</span><br><span class="line"></span><br><span class="line">PI = 3;</span><br><span class="line">// TypeError: Assignment to constant variable.</span><br></pre></td></tr></table></figure>
+<p>浏览器结果<img src="http://upload-images.jianshu.io/upload_images/1808701-a0ac032f8df48178.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="const声明之后不可变"></p>
+<p>上面代码表明改变常量的值会报错。</p>
+<p><code>const</code>声明的变量不得改变值，这意味着，<code>const</code>一旦声明变量，就必须立即初始化，不能留到以后赋值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const foo;</span><br><span class="line">// SyntaxError: Missing initializer in const declaration</span><br></pre></td></tr></table></figure>
+<p>浏览器结果<img src="http://upload-images.jianshu.io/upload_images/1808701-c94b2d1e8ca383c6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="const声明之后需要立即初始化"></p>
+<p>上面代码表示，对于<code>const</code>来说，只声明不赋值，就会报错。</p>
+<p><code>const</code>的作用域与<code>let</code>命令相同：只在声明所在的块级作用域内有效。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">if (true) &#123;</span><br><span class="line">  const MAX = 5;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">MAX // Uncaught ReferenceError: MAX is not defined</span><br></pre></td></tr></table></figure>
+<p>浏览器结果<img src="http://upload-images.jianshu.io/upload_images/1808701-5345ea3235c3fab7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="const声明只在块级作用域有效"></p>
+<p><code>const</code>命令声明的常量也是不提升，同样存在暂时性死区，只能在声明的位置后面使用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if (true) &#123;</span><br><span class="line">  console.log(MAX); // ReferenceError</span><br><span class="line">  const MAX = 5;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>浏览器结果<img src="http://upload-images.jianshu.io/upload_images/1808701-6713c6f28482ea8d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="const命令声明的常量不提升"></p>
+<p>上面代码在常量<code>MAX</code>声明之前就调用，结果报错。</p>
+<p><code>const</code>声明的常量，也与<code>let</code>一样不可重复声明。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var message = &quot;Hello!&quot;;</span><br><span class="line">let age = 25;</span><br><span class="line"></span><br><span class="line">// 以下两行都会报错</span><br><span class="line">const message = &quot;Goodbye!&quot;;</span><br><span class="line">const age = 30;</span><br></pre></td></tr></table></figure>
+<p>浏览器结果</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1808701-4b2aa30ee52fad97.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="const声明的常量不可重复声明1"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1808701-46e1ae1b8211487c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="const声明的常量不可重复声明2"></p>
+<p>对于复合类型的变量，变量名不指向数据，而是指向数据所在的地址。 const命令只是保证变量名指向的地址不变，并不保证该地址的数据不变，所以，将一个对象声明为常量必须非常小心。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">const foo = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">// 为 foo 添加一个属性，可以成功</span><br><span class="line">foo.prop = 123;</span><br><span class="line">foo.prop // 123</span><br><span class="line"></span><br><span class="line">// 将 foo 指向另一个对象，就会报错</span><br><span class="line">foo = &#123;&#125;; // TypeError:  Assignment to constant variable.</span><br></pre></td></tr></table></figure>
+<p>浏览器结果<br><img src="http://upload-images.jianshu.io/upload_images/1808701-2f8aee36ccadb4c2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="将一个对象声明为常量需要小心"></p>
+<p>上面代码中，常量<code>foo</code>储存的是一个地址，这个地址指向一个对象。不可变的只是这个地址，即不能把<code>foo</code>指向另一个地址，但对象本身是可变的，所以依然可以为其添加新属性。</p>
+<h2 id="跨模块常量"><a href="#跨模块常量" class="headerlink" title="跨模块常量"></a>跨模块常量</h2><p>上面说过，const声明的常量只在当前代码块有效。如果想设置跨模块的常量，可以采用下面的写法。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// constants.js 模块</span><br><span class="line">export const A = 1;</span><br><span class="line">export const B = 3;</span><br><span class="line">export const C = 4;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//test1.js 模块</span><br><span class="line">import * as constans from &apos;./constants&apos;;</span><br><span class="line">console.log(constants.A); // 1</span><br><span class="line">console.log(constants.B); // 3</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// test2.js 模块</span><br><span class="line">import &#123;A, B&#125; from &apos;./constants&apos;;</span><br><span class="line">console.log(A); //1</span><br><span class="line">console.log(B); //3</span><br></pre></td></tr></table></figure>
+<p>这里其实用到了Module（模块）的导入导出功能。以后会讲到。</p>
+<h2 id="全局对象的属性"><a href="#全局对象的属性" class="headerlink" title="全局对象的属性"></a>全局对象的属性</h2><p>全局对象是最顶层的对象，在浏览器环境指的是<code>window</code>对象，在Node指的是<code>global</code>对象。ES5之中，顶层对象的属性与全局变量是等价的。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">window.a = 1;</span><br><span class="line">a //1</span><br><span class="line"></span><br><span class="line">a = 2;</span><br><span class="line">window.a //2</span><br></pre></td></tr></table></figure></p>
+<p>浏览器结果<img src="http://upload-images.jianshu.io/upload_images/1808701-f4d82eff1d3b4305.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="全局对象属性"></p>
+<p>上面代码中，全局对象的属性赋值与全局变量的赋值，是同一件事。（对于Node.js来说，这一条只对REPL环境适用，模块环境中，全局变量必须显示声明成global对象的属性。）这种规定被市委JavaScript语言的一大问题。因为很容易不知不觉就创建了全局变量。<br>ES6为了改变这一点，一方面规定，为了保持兼容性，<code>var</code>命令和<code>function</code>命令声明的全局变量，依旧是全局对象的属性；另一方面规定，<code>let</code>命令、<code>const</code>命令和<code>class</code>命令声明的全局变量，不属于全局对象的属性。也就是说，从ES6开始，全局变量将逐步与顶层对象的属性脱钩。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var a = 1;</span><br><span class="line">// 如果在Node的REPL环境，可以写成global.a</span><br><span class="line">// 或者采用通用方法，写成this.a</span><br><span class="line">window.a // 1</span><br><span class="line"></span><br><span class="line">let b = 1;</span><br><span class="line">window.b // undefined</span><br></pre></td></tr></table></figure></p>
+<p>浏览器结果<img src="http://upload-images.jianshu.io/upload_images/1808701-69073bbb184afa91.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="全局对象属性看由谁定义"></p>
+<p>上面代码中，全局变量<code>a</code>由<code>var</code>命令声明，所以它是全局对象的属性；全局变量<code>b</code>由<code>let</code>命令声明，所以它不是全局对象的属性，返回<code>undefined</code>。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://es6.ruanyifeng.com/#docs/let" target="_blank" rel="noopener">let 和 const 命令</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat-reward-image.jpg" alt="weiqinl WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay-reward-image.jpg" alt="weiqinl Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/javascript/" rel="tag"># javascript</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/07/在webpack中使用Code-Splitting-代码分割来实现vue中的懒加载/" rel="next" title="在webpack中使用Code Splitting--代码分割来实现vue中的懒加载">
+                <i class="fa fa-chevron-left"></i> 在webpack中使用Code Splitting--代码分割来实现vue中的懒加载
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/17/webpack的四个核心概念介绍/" rel="prev" title="webpack的四个核心概念介绍">
+                webpack的四个核心概念介绍 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="weiqinl" />
+          <p class="site-author-name" itemprop="name">weiqinl</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/weiqinl" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.cnblogs.com/weiqinl" target="_blank" title="cnblogs">
+                  
+                    <i class="fa fa-fw fa-cnblogs"></i>
+                  
+                  cnblogs
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#先总结"><span class="nav-number">2.</span> <span class="nav-text">先总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#let-与-const-相同点和区别"><span class="nav-number">2.1.</span> <span class="nav-text">let 与 const 相同点和区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本用法"><span class="nav-number">3.</span> <span class="nav-text">基本用法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#let命令介绍"><span class="nav-number">3.1.</span> <span class="nav-text">let命令介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#let实用举例"><span class="nav-number">3.2.</span> <span class="nav-text">let实用举例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不存在变量提升"><span class="nav-number">4.</span> <span class="nav-text">不存在变量提升</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#暂时性死区（TDZ）"><span class="nav-number">5.</span> <span class="nav-text">暂时性死区（TDZ）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不允许重复声明"><span class="nav-number">6.</span> <span class="nav-text">不允许重复声明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#块级作用域"><span class="nav-number">7.</span> <span class="nav-text">块级作用域</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么需要块级作用域"><span class="nav-number">7.1.</span> <span class="nav-text">为什么需要块级作用域?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ES6的块级作用域"><span class="nav-number">7.2.</span> <span class="nav-text">ES6的块级作用域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#块级作用域与函数声明"><span class="nav-number">7.3.</span> <span class="nav-text">块级作用域与函数声明</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#const命令"><span class="nav-number">8.</span> <span class="nav-text">const命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本用法-1"><span class="nav-number">8.1.</span> <span class="nav-text">基本用法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#跨模块常量"><span class="nav-number">9.</span> <span class="nav-text">跨模块常量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#全局对象的属性"><span class="nav-number">10.</span> <span class="nav-text">全局对象的属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">11.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2017 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">weiqinl</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+    
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "6f98442731314934bcfc2ae590cfbed7",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

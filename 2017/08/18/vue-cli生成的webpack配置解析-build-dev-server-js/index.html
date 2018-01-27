@@ -1,0 +1,818 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="vue-cli,vuejs,webpack," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="weiqinl" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="#vue-cli生成的webpack配置解析-build/dev-server.js 我们在使用vue-cli搭建vuejs项目(Vuejs实例-01使用vue-cli脚手架搭建Vue.js项目)的时候，会自动生成一系列文件，其中就包含webpack配置文件。我们现在来看下，这些配置到底是什么意思，对我们开发过程中有什么影响。 项目搭建好了， 使用Bash运行npm run dev， 然后Bash">
+<meta name="keywords" content="vue-cli,vuejs,webpack">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue-cli生成的webpack配置解析-build&#x2F;dev-server.js">
+<meta property="og:url" content="http://weiqinl.com/2017/08/18/vue-cli生成的webpack配置解析-build-dev-server-js/index.html">
+<meta property="og:site_name" content="weiqinl">
+<meta property="og:description" content="#vue-cli生成的webpack配置解析-build/dev-server.js 我们在使用vue-cli搭建vuejs项目(Vuejs实例-01使用vue-cli脚手架搭建Vue.js项目)的时候，会自动生成一系列文件，其中就包含webpack配置文件。我们现在来看下，这些配置到底是什么意思，对我们开发过程中有什么影响。 项目搭建好了， 使用Bash运行npm run dev， 然后Bash">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-01-27T05:45:53.679Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="vue-cli生成的webpack配置解析-build&#x2F;dev-server.js">
+<meta name="twitter:description" content="#vue-cli生成的webpack配置解析-build/dev-server.js 我们在使用vue-cli搭建vuejs项目(Vuejs实例-01使用vue-cli脚手架搭建Vue.js项目)的时候，会自动生成一系列文件，其中就包含webpack配置文件。我们现在来看下，这些配置到底是什么意思，对我们开发过程中有什么影响。 项目搭建好了， 使用Bash运行npm run dev， 然后Bash">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://weiqinl.com/2017/08/18/vue-cli生成的webpack配置解析-build-dev-server-js/"/>
+
+
+
+
+
+  <title>vue-cli生成的webpack配置解析-build/dev-server.js | weiqinl</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?a8d79552a8bcc5f1dd63d45df196bf5b";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=62652408";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">weiqinl</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">web engineer</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://weiqinl.com/2017/08/18/vue-cli生成的webpack配置解析-build-dev-server-js/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="weiqinl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="weiqinl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">vue-cli生成的webpack配置解析-build/dev-server.js</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-18T19:15:36+08:00">
+                2017-08-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a class="cloud-tie-join-count" href="/2017/08/18/vue-cli生成的webpack配置解析-build-dev-server-js/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count join-count" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>#vue-cli生成的webpack配置解析-build/dev-server.js</p>
+<p>我们在使用vue-cli搭建vuejs项目(<a href="http://www.cnblogs.com/weiqinl/p/6875645.html" target="_blank" rel="noopener">Vuejs实例-01使用vue-cli脚手架搭建Vue.js项目</a>)的时候，会自动生成一系列文件，其中就包含webpack配置文件。我们现在来看下，这些配置到底是什么意思，对我们开发过程中有什么影响。</p>
+<p>项目搭建好了， 使用Bash运行<code>npm run dev</code>， 然后Bash界面会打印出一些东西，之后默认浏览器就打开了一个页面。为什么会有这些动作呢？我们从<code>package.json</code>开始看。<br><a id="more"></a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// package.json</span><br><span class="line">&#123;</span><br><span class="line">...</span><br><span class="line">  &quot;scripts&quot;: &#123;</span><br><span class="line">    &quot;dev&quot;: &quot;node build/dev-server.js&quot;,</span><br><span class="line">    &quot;start&quot;: &quot;node build/dev-server.js&quot;,</span><br><span class="line">    &quot;build&quot;: &quot;node build/build.js&quot;,</span><br><span class="line">    &quot;unit&quot;: &quot;cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run&quot;,</span><br><span class="line">    &quot;e2e&quot;: &quot;node test/e2e/runner.js&quot;,</span><br><span class="line">    &quot;test&quot;: &quot;npm run unit &amp;&amp; npm run e2e&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>运行<code>npm run dev</code>其实是执行了 <code>build/dev-server.js</code>文件。<br>那我们现在先分析这个文件，直接上源码。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br></pre></td><td class="code"><pre><span class="line">// dev-server.js</span><br><span class="line">// 调用check-versions.js 模块，检查版本node和npm的版本</span><br><span class="line">require(&apos;./check-versions&apos;)()</span><br><span class="line"></span><br><span class="line">// 获取配置</span><br><span class="line">var config = require(&apos;../config&apos;)</span><br><span class="line">// 如果Node的环境变量中没有设置当前的环境(NODE_ENV), 则使用config中配置的环境作为当前环境</span><br><span class="line">if (!process.env.NODE_ENV) &#123;</span><br><span class="line">  process.env.NODE_ENV = JSON.parse(config.dev.env.NODE_ENV)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// opn模块，使用默认应用程序，打开网址、文件、 可执行程序等内容的一个插件。</span><br><span class="line">// 例如,使用默认浏览器打开urls。跨平台可用。</span><br><span class="line">// 这里用它来调用默认浏览器打开dev-server监听的端口，例如: localhost:8080</span><br><span class="line">var opn = require(&apos;opn&apos;)</span><br><span class="line">// path模块提供用于处理文件和目录路径的实用程序。</span><br><span class="line">var path = require(&apos;path&apos;)</span><br><span class="line">// 引入express 模块</span><br><span class="line">var express = require(&apos;express&apos;)</span><br><span class="line">// 引入 webpack模块</span><br><span class="line">var webpack = require(&apos;webpack&apos;)</span><br><span class="line"></span><br><span class="line">// 一个express中间件，用于将http请求代理到其他服务器</span><br><span class="line">// 例：localhost:8080/api/xxx  --&gt;  localhost:3000/api/xxx</span><br><span class="line">// 这里使用该插件可以将前端开发中涉及到的请求代理到API服务器上，方便与服务器对接</span><br><span class="line">var proxyMiddleware = require(&apos;http-proxy-middleware&apos;)</span><br><span class="line"></span><br><span class="line">// 根据 Node 环境来引入相应的 webpack 配置</span><br><span class="line">// 这里用 &quot;testing&quot; 来判断Node环境, 是因为在两个webpack.***.conf中还会有判断</span><br><span class="line">var webpackConfig = process.env.NODE_ENV === &apos;testing&apos;</span><br><span class="line">  ? require(&apos;./webpack.prod.conf&apos;)</span><br><span class="line">  : require(&apos;./webpack.dev.conf&apos;)</span><br><span class="line"></span><br><span class="line">// dev-server 监听的端口，默认为config.dev.port设置的端口，即8080</span><br><span class="line">// default port where dev server listens for incoming traffic</span><br><span class="line">var port = process.env.PORT || config.dev.port</span><br><span class="line"></span><br><span class="line">// 用于判断是否要自动打开浏览器的布尔变量，</span><br><span class="line">// 当配置文件中没有设置自动打开浏览器的时候其值为 false</span><br><span class="line">// `!!`是一个逻辑操作，表示强制转换类型。这里强制转换为`bool`类型</span><br><span class="line">// automatically open browser, if not set will be false</span><br><span class="line">var autoOpenBrowser = !!config.dev.autoOpenBrowser</span><br><span class="line"></span><br><span class="line">// 定义HTTP代理，到自定义API接口</span><br><span class="line">// Define HTTP proxies to your custom API backend</span><br><span class="line">// https://github.com/chimurai/http-proxy-middleware</span><br><span class="line">var proxyTable = config.dev.proxyTable</span><br><span class="line"></span><br><span class="line">// 创建一个express实例</span><br><span class="line">var app = express()</span><br><span class="line"></span><br><span class="line">// 根据webpack配置文件创建Compiler对象</span><br><span class="line">var compiler = webpack(webpackConfig)</span><br><span class="line"></span><br><span class="line">// 引入webpack开发中间件, 此插件只在开发环境中有用。</span><br><span class="line">// 使用compiler对象来对相应的文件进行编译和绑定</span><br><span class="line">// 编译绑定后将得到的产物存放在内存中而没有写进磁盘</span><br><span class="line">// 将这个中间件交给express使用之后即可访问这些编译后的产品文件</span><br><span class="line">var devMiddleware = require(&apos;webpack-dev-middleware&apos;)(compiler, &#123;</span><br><span class="line">  //绑定中间件到publicpath中，使用方法和在webpack中相同</span><br><span class="line">  publicPath: webpackConfig.output.publicPath, </span><br><span class="line">  quiet: true // 允许在console控制台显示 警告 和 错误 信息</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">// 引入热重载功能的中间件。</span><br><span class="line">// Webpack热重载仅使用webpack-dev-middleware开发中间件。</span><br><span class="line">// 这个中间件，允许您在没有webpack-dev-server的情况下，将热重载功能到现有服务器中。</span><br><span class="line">var hotMiddleware = require(&apos;webpack-hot-middleware&apos;)(compiler, &#123;</span><br><span class="line">  // 用于打印行的功能</span><br><span class="line">  log: () =&gt; &#123;&#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">// 当html-webpack-plugin 提交之后通过热重载中间件发布重载动作使得页面重载</span><br><span class="line">// force page reload when html-webpack-plugin template changes</span><br><span class="line">compiler.plugin(&apos;compilation&apos;, function (compilation) &#123;</span><br><span class="line">  compilation.plugin(&apos;html-webpack-plugin-after-emit&apos;, function (data, cb) &#123;</span><br><span class="line">    hotMiddleware.publish(&#123; action: &apos;reload&apos; &#125;)</span><br><span class="line">    cb()</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">// 将 proxyTable 中的代理请求配置挂在express服务器上</span><br><span class="line">// proxy api requests</span><br><span class="line">Object.keys(proxyTable).forEach(function (context) &#123;</span><br><span class="line">  var options = proxyTable[context]</span><br><span class="line">  if (typeof options === &apos;string&apos;) &#123;</span><br><span class="line">    options = &#123; target: options &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  app.use(proxyMiddleware(options.filter || context, options))</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">// connect-history-api-fallback 模块，通过指定的索引页来代理请求的中间件，对于使用HTML5历史API的单个页面应用程序非常有用。</span><br><span class="line">// 处理 HTML5历史api回退的问题</span><br><span class="line">// handle fallback for HTML5 history API</span><br><span class="line">app.use(require(&apos;connect-history-api-fallback&apos;)())</span><br><span class="line"></span><br><span class="line">// 为webpack打包输出服务</span><br><span class="line">// serve webpack bundle output</span><br><span class="line">app.use(devMiddleware)</span><br><span class="line"></span><br><span class="line">// 热重载和状态保留功能</span><br><span class="line">// 显示编译错误信息</span><br><span class="line">// enable hot-reload and state-preserving</span><br><span class="line">// compilation error display</span><br><span class="line">app.use(hotMiddleware)</span><br><span class="line"></span><br><span class="line">// posix属性提供了对路径方法的POSIX特定实现的访问。</span><br><span class="line">// 服务纯静态资源。 利用Express托管静态文件，使其可以作为资源访问</span><br><span class="line">// 想要访问static文件夹下的资源，必须添加 staticPath 返回的地址作为上一级地址。</span><br><span class="line">// serve pure static assets</span><br><span class="line">var staticPath = path.posix.join(config.dev.assetsPublicPath, config.dev.assetsSubDirectory)</span><br><span class="line">app.use(staticPath, express.static(&apos;./static&apos;))</span><br><span class="line"></span><br><span class="line">// 应用启动时候的访问地址信息，例如 http://localhost:8080</span><br><span class="line">var uri = &apos;http://localhost:&apos; + port</span><br><span class="line"></span><br><span class="line">// 异步回调</span><br><span class="line">var _resolve</span><br><span class="line">var readyPromise = new Promise(resolve =&gt; &#123;</span><br><span class="line">  _resolve = resolve</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">console.log(&apos;&gt; Starting dev server...&apos;)</span><br><span class="line">// 如果webpack开发中间件有效执行，那么执行后面的回调函数。</span><br><span class="line">devMiddleware.waitUntilValid(() =&gt; &#123;</span><br><span class="line">  console.log(&apos;&gt; Listening at &apos; + uri + &apos;\n&apos;)</span><br><span class="line">  // 如果是 testing 环境， 不需要打开浏览器</span><br><span class="line">  // when env is testing, don&apos;t need open it</span><br><span class="line">  if (autoOpenBrowser &amp;&amp; process.env.NODE_ENV !== &apos;testing&apos;) &#123;</span><br><span class="line">    opn(uri)</span><br><span class="line">  &#125;</span><br><span class="line">  _resolve()</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">// 启动express服务器并监听相应的端口（8080）</span><br><span class="line">var server = app.listen(port)</span><br><span class="line"></span><br><span class="line">// 模块导出。</span><br><span class="line">// 1：执行异步函数</span><br><span class="line">// 2：提供close方法，关闭服务器</span><br><span class="line">module.exports = &#123;</span><br><span class="line">  ready: readyPromise,</span><br><span class="line">  close: () =&gt; &#123;</span><br><span class="line">    server.close()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>以上，就是我对这个文件的解析。</p>
+<p>后续再对其他文件解析…欢迎关注😄</p>
+<p>参考链接：<br><a href="http://blog.csdn.net/hongchh/article/details/55113751" target="_blank" rel="noopener">http://blog.csdn.net/hongchh/article/details/55113751</a></p>
+<p>更多内容请查看:<br><a href="http://weiqinl.com">个人主页</a><br><a href="http://www.cnblogs.com/weiqinl" target="_blank" rel="noopener">博客园</a><br><a href="https://github.com/weiqinl" target="_blank" rel="noopener">github</a><br><a href="http://www.jianshu.com/u/9f890c7bde33" target="_blank" rel="noopener">简书</a><br>您的支持是对博主最大的鼓励，感谢您的认真阅读，欢迎留言讨论。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat-reward-image.jpg" alt="weiqinl WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay-reward-image.jpg" alt="weiqinl Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/vue-cli/" rel="tag"># vue-cli</a>
+          
+            <a href="/tags/vuejs/" rel="tag"># vuejs</a>
+          
+            <a href="/tags/webpack/" rel="tag"># webpack</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/17/webpack的四个核心概念介绍/" rel="next" title="webpack的四个核心概念介绍">
+                <i class="fa fa-chevron-left"></i> webpack的四个核心概念介绍
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/09/21/CSS3-box-sizing属性的应用/" rel="prev" title="CSS3 box-sizing属性的应用">
+                CSS3 box-sizing属性的应用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="weiqinl" />
+          <p class="site-author-name" itemprop="name">weiqinl</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/weiqinl" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.cnblogs.com/weiqinl" target="_blank" title="cnblogs">
+                  
+                    <i class="fa fa-fw fa-cnblogs"></i>
+                  
+                  cnblogs
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2017 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">weiqinl</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+    
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "6f98442731314934bcfc2ae590cfbed7",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

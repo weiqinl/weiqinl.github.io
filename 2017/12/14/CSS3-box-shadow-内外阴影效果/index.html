@@ -1,0 +1,893 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="css," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="weiqinl" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="说明box-shadow 属性可以给元素边框周围添加一个或者多个阴影效果。定义多个阴影，使用逗号分隔。 语法box-shadow: none | [inset? &amp;amp;&amp;amp; [&amp;lt;offset-x&amp;gt; &amp;lt;offset-y&amp;gt; &amp;lt;blur-radius&amp;gt;? &amp;lt;spread-radius&amp;gt;? &amp;amp;&amp;amp; &amp;lt;color&amp;gt;? ] ]">
+<meta name="keywords" content="css">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS3 box-shadow 内外阴影效果">
+<meta property="og:url" content="http://weiqinl.com/2017/12/14/CSS3-box-shadow-内外阴影效果/index.html">
+<meta property="og:site_name" content="weiqinl">
+<meta property="og:description" content="说明box-shadow 属性可以给元素边框周围添加一个或者多个阴影效果。定义多个阴影，使用逗号分隔。 语法box-shadow: none | [inset? &amp;amp;&amp;amp; [&amp;lt;offset-x&amp;gt; &amp;lt;offset-y&amp;gt; &amp;lt;blur-radius&amp;gt;? &amp;lt;spread-radius&amp;gt;? &amp;amp;&amp;amp; &amp;lt;color&amp;gt;? ] ]">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://images2017.cnblogs.com/blog/564792/201712/564792-20171214154831888-1050223308.png">
+<meta property="og:updated_time" content="2018-01-27T05:45:53.674Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSS3 box-shadow 内外阴影效果">
+<meta name="twitter:description" content="说明box-shadow 属性可以给元素边框周围添加一个或者多个阴影效果。定义多个阴影，使用逗号分隔。 语法box-shadow: none | [inset? &amp;amp;&amp;amp; [&amp;lt;offset-x&amp;gt; &amp;lt;offset-y&amp;gt; &amp;lt;blur-radius&amp;gt;? &amp;lt;spread-radius&amp;gt;? &amp;amp;&amp;amp; &amp;lt;color&amp;gt;? ] ]">
+<meta name="twitter:image" content="http://images2017.cnblogs.com/blog/564792/201712/564792-20171214154831888-1050223308.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://weiqinl.com/2017/12/14/CSS3-box-shadow-内外阴影效果/"/>
+
+
+
+
+
+  <title>CSS3 box-shadow 内外阴影效果 | weiqinl</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?a8d79552a8bcc5f1dd63d45df196bf5b";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=62652408";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">weiqinl</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">web engineer</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://weiqinl.com/2017/12/14/CSS3-box-shadow-内外阴影效果/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="weiqinl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="weiqinl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">CSS3 box-shadow 内外阴影效果</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-14T15:54:45+08:00">
+                2017-12-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a class="cloud-tie-join-count" href="/2017/12/14/CSS3-box-shadow-内外阴影效果/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count join-count" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>box-shadow 属性可以给元素边框周围添加一个或者多个阴影效果。定义多个阴影，使用逗号分隔。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><p><code>box-shadow: none | [inset? &amp;&amp; [&lt;offset-x&gt; &lt;offset-y&gt; &lt;blur-radius&gt;? &lt;spread-radius&gt;? &amp;&amp; &lt;color&gt;? ] ]</code></p>
+<a id="more"></a>
+<h3 id="解释"><a href="#解释" class="headerlink" title="解释"></a>解释</h3><p><code>none</code>：默认值为none，表示没有阴影<br><code>inset</code>：<strong>可选</strong>。将边框外阴影改为边框内阴影（即使是透明边框），背景之上内容之下。如果不写，默认为边框外阴影。inset只可写在最前或者最后。<br><code>offset-x</code>：<strong>必需</strong>。阴影水平方向的偏移量。 0，表示阴影在元素后面；正值，表示阴影在元素右边👉；负值，表示阴影在元素左边👈<br><code>offset-y</code>：<strong>必需</strong>。阴影垂直方向的偏移量。   0，表示阴影在元素后面；正值，表示阴影在元素下边☟；负值，表示阴影在元素上边☝<br><code>blur-radius</code>：<strong>可选</strong>。阴影的模糊距离。<strong>不允许为负值</strong>。如果值为0，则阴影的边缘清晰，否则，值越大，阴影的边缘越模糊。<br><code>spread-radius</code>：<strong>可选</strong>。默认为0，此时阴影与元素同样大；正直，阴影向各个方向延伸扩大；负值，阴影沿相反方向缩小。<br><code>color</code>：<strong>可选</strong>。如果没有指定，使用浏览器默认颜色–通常是<code>color</code>属性的值。  </p>
+<h2 id="举个例子"><a href="#举个例子" class="headerlink" title="举个例子"></a>举个例子</h2><p>注意：以下例子不是截图</p>
+<h3 id="正常情况"><a href="#正常情况" class="headerlink" title="正常情况"></a>正常情况</h3><p><code>&lt;p style=&#39;width:80%; border: 1px solid #ccc; box-shadow:15px 5px blue&#39;&gt;css阴影&lt;/p&gt;</code></p>
+<p style="width:80%; border: 1px solid #ccc; box-shadow:15px 5px blue">css阴影 box-shadow:15px 5px blue</p>
+
+<p><code>&lt;p style=&#39;width:80%; border: 1px solid #ccc; box-shadow:15px 5px 10px blue&#39;&gt;css阴影&lt;/p&gt;</code>  </p>
+<p style="width:80%; border: 1px solid #ccc; box-shadow:15px 5px 10px blue">css阴影 box-shadow:15px 5px 10px blue</p>
+
+<p><code>&lt;p style=&#39;width:80%; border: 1px solid #ccc; box-shadow:15px 5px 10px 5px blue&#39;&gt;css阴影&lt;/p&gt;</code></p>
+<p style="width:80%; border: 1px solid #ccc; box-shadow:15px 5px 10px 5px blue">css阴影 box-shadow:15px 5px 10px 5px blue</p>
+
+<p><code>&lt;p style=&#39;width:80%; border: 1px solid #ccc; box-shadow:15px 5px 0px 5px blue&#39;&gt;css阴影&lt;/p&gt;</code></p>
+<p style="width:80%; border: 1px solid #ccc; box-shadow:15px 5px 0px 5px blue">css阴影 box-shadow:15px 5px 0px 5px blue</p>
+
+<h3 id="负值-blur-radius不允许为负值，其他三个可以"><a href="#负值-blur-radius不允许为负值，其他三个可以" class="headerlink" title="负值 (blur-radius不允许为负值，其他三个可以)"></a>负值 (blur-radius不允许为负值，其他三个可以)</h3><p><code>&lt;p style=&#39;width:80%; border: 1px solid #ccc; box-shadow:15px -5px blue&#39;&gt;css阴影&lt;/p&gt;</code></p>
+<p style="width:80%; border: 1px solid #ccc; box-shadow:15px -5px blue">css阴影 box-shadow:15px -5px blue</p>
+
+<p><code>&lt;p style=&#39;width:80%; border: 1px solid #ccc; box-shadow:-15px -5px blue&#39;&gt;css阴影&lt;/p&gt;</code></p>
+<p style="width:80%; border: 1px solid #ccc; box-shadow:-15px -5px blue">css阴影 box-shadow:-15px -5px blue</p>
+
+<p><code>&lt;p style=&#39;width:80%; border: 1px solid #ccc; box-shadow:-15px 5px blue&#39;&gt;css阴影&lt;/p&gt;</code></p>
+<p style="width:80%; border: 1px solid #ccc; box-shadow:-15px 5px blue">css阴影 box-shadow:-15px 5px blue</p>
+
+<p><code>&lt;p style=&#39;width:80%; border: 1px solid #ccc; box-shadow:15px 5px 10px -5px blue&#39;&gt;css阴影&lt;/p&gt;</code></p>
+<p style="width:80%; border: 1px solid #ccc; box-shadow:15px 5px 10px -5px blue">css阴影 box-shadow:15px 5px 10px -5px blue</p>
+
+<p><code>&lt;p style=&#39;width:80%; border: 1px solid #ccc; box-shadow:15px 5px 0px -5px blue&#39;&gt;css阴影&lt;/p&gt;</code></p>
+<p style="width:80%; border: 1px solid #ccc; box-shadow:15px 5px 0px -5px blue">css阴影 box-shadow:15px 5px 0px -5px blue</p>
+
+<h3 id="inset-内阴影"><a href="#inset-内阴影" class="headerlink" title="inset 内阴影"></a>inset 内阴影</h3><p><code>&lt;p style=&#39;width:80%; border: 1px solid #ccc; box-shadow:inset 15px 5px blue&#39;&gt;css阴影&lt;/p&gt;</code></p>
+<p style="width:80%; border: 1px solid #ccc; box-shadow:inset 15px 5px blue">css阴影 box-shadow:inset 15px 5px blue</p>
+
+<p><code>&lt;p style=&#39;width:80%; border: 1px solid #ccc; box-shadow:inset 15px 5px 10px blue&#39;&gt;css阴影&lt;/p&gt;</code></p>
+<p style="width:80%; border: 1px solid #ccc; box-shadow:inset 15px 5px 10px blue">css阴影 box-shadow:inset 15px 5px 10px blue</p>
+
+<p><code>&lt;p style=&#39;width:80%; border: 1px solid #ccc; box-shadow:inset 15px 5px 10px 5px blue&#39;&gt;css阴影&lt;/p&gt;</code></p>
+<p style="width:80%; border: 1px solid #ccc; box-shadow:inset 15px 5px 10px 5px blue">css阴影 box-shadow:inset 15px 5px 10px 5px blue</p> 
+
+<p><code>&lt;p style=&#39;width:80%; border: 1px solid #ccc; box-shadow:inset 15px 5px 0px 5px blue&#39;&gt;css阴影&lt;/p&gt;</code></p>
+<p style="width:80%; border: 1px solid #ccc; box-shadow:inset 15px 5px 0px 5px blue">css阴影 box-shadow:inset 15px 5px 0px 5px blue</p>
+
+<h3 id="多个阴影"><a href="#多个阴影" class="headerlink" title="多个阴影"></a>多个阴影</h3><p>多个阴影，写在前面的权重大，阴影重合部分权重大的值在上面。</p>
+<p><code>&lt;p style=&#39;width:80%; border: 1px solid #ccc; box-shadow:15px 5px blue, -15px -5px red&#39;&gt;css阴影&lt;/p&gt;</code></p>
+<p style="width:80%; border: 1px solid #ccc; box-shadow:15px 5px blue, -15px -5px red">css阴影 box-shadow:15px 5px blue, -15px -5px red</p>
+
+<p><code>&lt;p style=&#39;width:80%; border: 1px solid #ccc; box-shadow:15px 0px 10px blue, -15px 0px 10px red, 0px 5px 10px yellow, 0px -5px 10px green &#39;&gt;css阴影&lt;/p&gt;</code></p>
+<p style="width:80%; border: 1px solid #ccc; box-shadow:15px 0px 10px blue, -15px 0px 10px red, 0px 5px 10px yellow, 0px -5px 10px green ">css阴影 box-shadow:15px 0px 10px blue, -15px 0px 10px red, 0px 5px 10px yellow, 0px -5px 10px green </p>
+
+<p><code>&lt;p style=&#39;width:80%; border: 1px solid #ccc; box-shadow:-15px -5px red inset,inset 15px 5px blue&#39;&gt;css阴影&lt;/p&gt;</code></p>
+<p style="width:80%; border: 1px solid #ccc; box-shadow:-15px -5px red inset,inset 15px 5px blue">css阴影 box-shadow:-15px -5px red inset,inset 15px 5px blue</p>
+
+<p><code>&lt;p style=&#39;width:80%; border: 1px solid #ccc; box-shadow:inset 15px 0px 10px blue, inset -15px 0px 10px red, inset 0px 5px 10px yellow, 0px -5px 10px green inset &#39;&gt;css阴影&lt;/p&gt;</code></p>
+<p style="width:80%; border: 1px solid #ccc; box-shadow:inset 15px 0px 10px blue, inset -15px 0px 10px red, inset 0px 5px 10px yellow, 0px -5px 10px green inset ">css阴影 box-shadow:inset 15px 0px 10px blue, inset -15px 0px 10px red, inset 0px 5px 10px yellow, 0px -5px 10px green inset</p>
+
+<h2 id="在线生成阴影值"><a href="#在线生成阴影值" class="headerlink" title="在线生成阴影值"></a>在线生成阴影值</h2><p>1：F12<img src="http://images2017.cnblogs.com/blog/564792/201712/564792-20171214154831888-1050223308.png" alt="开发者工具直接调试"></p>
+<p>2: <a href="https://cssgenerator.org/box-shadow-css-generator.html" target="_blank" rel="noopener">Box Shadow CSS Generator</a></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>以上，基本用法已经会了。更复杂的情景，理解了应该很好写出来。在翻阅资料的时候，还看到了另一个属性 <code>filter:drop-shadow</code>，也表示阴影，但是有区别。<br><a href="http://www.zhangxinxu.com/wordpress/2016/05/css3-filter-drop-shadow-vs-box-shadow/" target="_blank" rel="noopener">CSS3 filter:drop-shadow滤镜与box-shadow区别应用</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat-reward-image.jpg" alt="weiqinl WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay-reward-image.jpg" alt="weiqinl Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/css/" rel="tag"># css</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/07/html5原生拖拽-拖放-drag-drop-详解/" rel="next" title="html5原生拖拽/拖放 drag & drop 详解">
+                <i class="fa fa-chevron-left"></i> html5原生拖拽/拖放 drag & drop 详解
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/27/mac通过自带的ssh连接Linux服务器并上传解压文件/" rel="prev" title="mac通过自带的ssh连接Linux服务器并上传解压文件">
+                mac通过自带的ssh连接Linux服务器并上传解压文件 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="weiqinl" />
+          <p class="site-author-name" itemprop="name">weiqinl</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/weiqinl" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.cnblogs.com/weiqinl" target="_blank" title="cnblogs">
+                  
+                    <i class="fa fa-fw fa-cnblogs"></i>
+                  
+                  cnblogs
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#说明"><span class="nav-number">1.</span> <span class="nav-text">说明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#语法"><span class="nav-number">1.1.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解释"><span class="nav-number">1.2.</span> <span class="nav-text">解释</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#举个例子"><span class="nav-number">2.</span> <span class="nav-text">举个例子</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#正常情况"><span class="nav-number">2.1.</span> <span class="nav-text">正常情况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#负值-blur-radius不允许为负值，其他三个可以"><span class="nav-number">2.2.</span> <span class="nav-text">负值 (blur-radius不允许为负值，其他三个可以)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#inset-内阴影"><span class="nav-number">2.3.</span> <span class="nav-text">inset 内阴影</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多个阴影"><span class="nav-number">2.4.</span> <span class="nav-text">多个阴影</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在线生成阴影值"><span class="nav-number">3.</span> <span class="nav-text">在线生成阴影值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2017 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">weiqinl</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+    
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "6f98442731314934bcfc2ae590cfbed7",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
