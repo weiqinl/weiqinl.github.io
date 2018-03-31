@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://weiqinl.com/"/>
-  <updated>2018-01-27T05:49:09.623Z</updated>
+  <updated>2018-03-31T02:13:05.499Z</updated>
   <id>http://weiqinl.com/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>JavaScript对象的valueOf()方法</title>
+    <link href="http://weiqinl.com/2018/03/31/JavaScript%E5%AF%B9%E8%B1%A1%E7%9A%84valueOf-%E6%96%B9%E6%B3%95/"/>
+    <id>http://weiqinl.com/2018/03/31/JavaScript对象的valueOf-方法/</id>
+    <published>2018-03-31T02:08:52.000Z</published>
+    <updated>2018-03-31T02:13:05.499Z</updated>
+    
+    <content type="html"><![CDATA[<p>js对象中的<code>valueOf()</code>方法和<code>toString()</code>方法非常类似，但是，当需要返回对象的原始值而非字符串的时候才调用它，尤其是转换为数字的时候。如果在需要使用原始值的上下文中使用了对象，JavaScript就会自动调用<code>valueOf()</code>方法。</p><p><code>valueOf()</code>方法是<code>Object</code>的原型方法，每个对象都具有该方法，但是各对象返回的值有一定的区别。我们一起来看看。 </p><h2 id="Object-prototype-valueOf"><a href="#Object-prototype-valueOf" class="headerlink" title="Object.prototype.valueOf()"></a>Object.prototype.valueOf()</h2><p>JavaScript调用<code>valueOf()</code>方法将对象转换为原始值。你很少需要自己调用<code>valueOf()</code>方法； </p><p>默认情况下，<code>valueOf()</code>方法由Object后面的每个对象继承。每个内置的核心对象都会覆盖此方法以放回适当的值。<br>如果对象没有原始值，则<code>valueOf()</code>将返回对象本身。</p><p>你可以在自己的代码中使用<code>valueOf()</code>将内置对象转换为原始值。创建自定义对象时，可以覆盖<code>Object.prototype.valueOf()</code>来调用自定义方法，而不是默认<code>Object</code>方法。</p><h3 id="覆盖自定义对象的valueOf-方法"><a href="#覆盖自定义对象的valueOf-方法" class="headerlink" title="覆盖自定义对象的valueOf()方法"></a>覆盖自定义对象的<code>valueOf()</code>方法</h3><p>你可以创建一个取代<code>valueOf()</code>方法的函数，你的方法必须不能传入参数。<br>假设你有个对象叫<code>MyNumberType</code>而你想为它创建一个<code>valueOf()</code>方法。下面的代码为<code>valueOf()</code>方法赋予了一个自定义函数:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MyNumberType.prototype.valueOf = function() &#123; return customPrimitiveValue; &#125;;</span><br></pre></td></tr></table></figure></p><p>有了这样的一个方法，下一次每当<code>MyNumberType</code>要被转换为原始类型值时，JavaScript在此之前会自动调用自定义的<code>valueOf()</code>方法。<br><code>valueOf()</code>方法一般都会被JavaScript自动调用，但你也可以像下面代码那样自己调用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">myNumberType.valueOf()</span><br></pre></td></tr></table></figure></p><h2 id="String-prototype-valueOf"><a href="#String-prototype-valueOf" class="headerlink" title="String.prototype.valueOf()"></a>String.prototype.valueOf()</h2><p>语法：<code>strObj.valueOf()</code><br>返回值：表示给定<code>String</code>对象的原始值<br>说明：<code>valueOf()</code>方法返回一个<code>String</code>对象的原始值，该值等同于<code>String.prototype.toString()</code>。<br>该方法通常在JavaScript内部被调用，而不是在代码里显示调用。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let x = new String(&apos;Hello world&apos;)</span><br><span class="line">console.log(x.valueOf())   // Hello world</span><br></pre></td></tr></table></figure></p><p><img src="http://images2017.cnblogs.com/blog/564792/201801/564792-20180129235451546-2056772811.png" alt="String.prototype.valueOf()"></p><h2 id="Date-prototype-valueOf"><a href="#Date-prototype-valueOf" class="headerlink" title="Date.prototype.valueOf()"></a>Date.prototype.valueOf()</h2><p>语法：<code>dataObj.valueOf()</code><br>返回值：表示给定<code>Date</code>对象的原始值<br>说明：<code>valueOf()</code>方法返回以数值格式表示的一个<code>Date</code>对象的原始值。该值从1970年1月1日0时0分0秒（UTC，即协调世界时）到该日期对象所代表时间的毫秒数。<br>该方法的功能和<code>Date.prototype.getTime()</code>方法一样。<br>该方法通常在JavaScript内部调用，而不是在代码中显示调用。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var x = new Date(2018, 1, 12)</span><br><span class="line">var myVar = x.valueOf()</span><br><span class="line">console.log(myVar) // 1518364800000</span><br></pre></td></tr></table></figure><h2 id="Number-prototype-valueOf"><a href="#Number-prototype-valueOf" class="headerlink" title="Number.prototype.valueOf()"></a>Number.prototype.valueOf()</h2><p>语法： <code>numObj.valueOf()</code><br>返回值：表示给定<code>Number</code>对象的原始值。<br>说明：该方法通常在JavaScript内部调用，而不是在代码中显示调用。覆盖<code>Object.prototype.valueOf()</code>方法<br>案例：<br><img src="http://images2017.cnblogs.com/blog/564792/201801/564792-20180129235430343-552143799.png" alt="Number.prototype.valueOf()"></p><h2 id="Boolean-prototype-valueOf"><a href="#Boolean-prototype-valueOf" class="headerlink" title="Boolean.prototype.valueOf()"></a>Boolean.prototype.valueOf()</h2><p>语法：<code>bool.valueOf()</code><br>返回值： 返回给定<code>Boolean</code>对象的原始值<br>说明： <code>Boolean</code>的<code>valueOf()</code>方法返回一个<code>Boolean</code>字面量的原始值作为布尔数据类型。该方法通常在JavaScript内部调用，而不是在代码中显示调用。<br>案例：<br><img src="http://images2017.cnblogs.com/blog/564792/201801/564792-20180129235413140-100092005.png" alt="Boolean.prototype.valueOf()"></p><h2 id="Symbol-prototype-valueOf"><a href="#Symbol-prototype-valueOf" class="headerlink" title="Symbol.prototype.valueOf()"></a>Symbol.prototype.valueOf()</h2><p>语法： <code>Symbol().valueOf()</code><br>返回值：返回给定<code>Symbol</code>对象的原始值<br>说明：<code>Symbol</code>的<code>valueOf()</code>方法返回<code>Symbol</code>对象的原始值作为<code>Symbol</code>数据类型。JavaScript调用<code>valueOf()</code>方法将对象转换为原始值。你很少需要自己调用<code>valueOf()</code>方法。当遇到期望有原始值的对象时，JavaScript会自动调用它。<br>案例：<br><img src="http://images2017.cnblogs.com/blog/564792/201801/564792-20180129235355750-1139685875.png" alt=" Symbol.prototype.valueOf()"><br>[完]</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;js对象中的&lt;code&gt;valueOf()&lt;/code&gt;方法和&lt;code&gt;toString()&lt;/code&gt;方法非常类似，但是，当需要返回对象的原始值而非字符串的时候才调用它，尤其是转换为数字的时候。如果在需要使用原始值的上下文中使用了对象，JavaScript就会自动调用
+      
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>mac通过自带的ssh连接Linux服务器并上传解压文件</title>
@@ -435,9 +456,9 @@ $ npm run dev
     </summary>
     
     
-      <category term="windows" scheme="http://weiqinl.com/tags/windows/"/>
-    
       <category term="hexo" scheme="http://weiqinl.com/tags/hexo/"/>
+    
+      <category term="windows" scheme="http://weiqinl.com/tags/windows/"/>
     
       <category term="github" scheme="http://weiqinl.com/tags/github/"/>
     

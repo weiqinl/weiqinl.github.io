@@ -317,6 +317,131 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://weiqinl.com/2018/03/31/JavaScript对象的valueOf-方法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="weiqinl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="weiqinl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/31/JavaScript对象的valueOf-方法/" itemprop="url">JavaScript对象的valueOf()方法</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-31T10:08:52+08:00">
+                2018-03-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>js对象中的<code>valueOf()</code>方法和<code>toString()</code>方法非常类似，但是，当需要返回对象的原始值而非字符串的时候才调用它，尤其是转换为数字的时候。如果在需要使用原始值的上下文中使用了对象，JavaScript就会自动调用<code>valueOf()</code>方法。</p>
+<p><code>valueOf()</code>方法是<code>Object</code>的原型方法，每个对象都具有该方法，但是各对象返回的值有一定的区别。我们一起来看看。 </p>
+<h2 id="Object-prototype-valueOf"><a href="#Object-prototype-valueOf" class="headerlink" title="Object.prototype.valueOf()"></a>Object.prototype.valueOf()</h2><p>JavaScript调用<code>valueOf()</code>方法将对象转换为原始值。你很少需要自己调用<code>valueOf()</code>方法； </p>
+<p>默认情况下，<code>valueOf()</code>方法由Object后面的每个对象继承。每个内置的核心对象都会覆盖此方法以放回适当的值。<br>如果对象没有原始值，则<code>valueOf()</code>将返回对象本身。</p>
+<p>你可以在自己的代码中使用<code>valueOf()</code>将内置对象转换为原始值。创建自定义对象时，可以覆盖<code>Object.prototype.valueOf()</code>来调用自定义方法，而不是默认<code>Object</code>方法。</p>
+<h3 id="覆盖自定义对象的valueOf-方法"><a href="#覆盖自定义对象的valueOf-方法" class="headerlink" title="覆盖自定义对象的valueOf()方法"></a>覆盖自定义对象的<code>valueOf()</code>方法</h3><p>你可以创建一个取代<code>valueOf()</code>方法的函数，你的方法必须不能传入参数。<br>假设你有个对象叫<code>MyNumberType</code>而你想为它创建一个<code>valueOf()</code>方法。下面的代码为<code>valueOf()</code>方法赋予了一个自定义函数:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MyNumberType.prototype.valueOf = function() &#123; return customPrimitiveValue; &#125;;</span><br></pre></td></tr></table></figure></p>
+<p>有了这样的一个方法，下一次每当<code>MyNumberType</code>要被转换为原始类型值时，JavaScript在此之前会自动调用自定义的<code>valueOf()</code>方法。<br><code>valueOf()</code>方法一般都会被JavaScript自动调用，但你也可以像下面代码那样自己调用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">myNumberType.valueOf()</span><br></pre></td></tr></table></figure></p>
+<h2 id="String-prototype-valueOf"><a href="#String-prototype-valueOf" class="headerlink" title="String.prototype.valueOf()"></a>String.prototype.valueOf()</h2><p>语法：<code>strObj.valueOf()</code><br>返回值：表示给定<code>String</code>对象的原始值<br>说明：<code>valueOf()</code>方法返回一个<code>String</code>对象的原始值，该值等同于<code>String.prototype.toString()</code>。<br>该方法通常在JavaScript内部被调用，而不是在代码里显示调用。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let x = new String(&apos;Hello world&apos;)</span><br><span class="line">console.log(x.valueOf())   // Hello world</span><br></pre></td></tr></table></figure></p>
+<p><img src="http://images2017.cnblogs.com/blog/564792/201801/564792-20180129235451546-2056772811.png" alt="String.prototype.valueOf()"></p>
+<h2 id="Date-prototype-valueOf"><a href="#Date-prototype-valueOf" class="headerlink" title="Date.prototype.valueOf()"></a>Date.prototype.valueOf()</h2><p>语法：<code>dataObj.valueOf()</code><br>返回值：表示给定<code>Date</code>对象的原始值<br>说明：<code>valueOf()</code>方法返回以数值格式表示的一个<code>Date</code>对象的原始值。该值从1970年1月1日0时0分0秒（UTC，即协调世界时）到该日期对象所代表时间的毫秒数。<br>该方法的功能和<code>Date.prototype.getTime()</code>方法一样。<br>该方法通常在JavaScript内部调用，而不是在代码中显示调用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var x = new Date(2018, 1, 12)</span><br><span class="line">var myVar = x.valueOf()</span><br><span class="line">console.log(myVar) // 1518364800000</span><br></pre></td></tr></table></figure>
+<h2 id="Number-prototype-valueOf"><a href="#Number-prototype-valueOf" class="headerlink" title="Number.prototype.valueOf()"></a>Number.prototype.valueOf()</h2><p>语法： <code>numObj.valueOf()</code><br>返回值：表示给定<code>Number</code>对象的原始值。<br>说明：该方法通常在JavaScript内部调用，而不是在代码中显示调用。覆盖<code>Object.prototype.valueOf()</code>方法<br>案例：<br><img src="http://images2017.cnblogs.com/blog/564792/201801/564792-20180129235430343-552143799.png" alt="Number.prototype.valueOf()"></p>
+<h2 id="Boolean-prototype-valueOf"><a href="#Boolean-prototype-valueOf" class="headerlink" title="Boolean.prototype.valueOf()"></a>Boolean.prototype.valueOf()</h2><p>语法：<code>bool.valueOf()</code><br>返回值： 返回给定<code>Boolean</code>对象的原始值<br>说明： <code>Boolean</code>的<code>valueOf()</code>方法返回一个<code>Boolean</code>字面量的原始值作为布尔数据类型。该方法通常在JavaScript内部调用，而不是在代码中显示调用。<br>案例：<br><img src="http://images2017.cnblogs.com/blog/564792/201801/564792-20180129235413140-100092005.png" alt="Boolean.prototype.valueOf()"></p>
+<h2 id="Symbol-prototype-valueOf"><a href="#Symbol-prototype-valueOf" class="headerlink" title="Symbol.prototype.valueOf()"></a>Symbol.prototype.valueOf()</h2><p>语法： <code>Symbol().valueOf()</code><br>返回值：返回给定<code>Symbol</code>对象的原始值<br>说明：<code>Symbol</code>的<code>valueOf()</code>方法返回<code>Symbol</code>对象的原始值作为<code>Symbol</code>数据类型。JavaScript调用<code>valueOf()</code>方法将对象转换为原始值。你很少需要自己调用<code>valueOf()</code>方法。当遇到期望有原始值的对象时，JavaScript会自动调用它。<br>案例：<br><img src="http://images2017.cnblogs.com/blog/564792/201801/564792-20180129235355750-1139685875.png" alt=" Symbol.prototype.valueOf()"><br>[完]</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://weiqinl.com/2018/01/27/mac通过自带的ssh连接Linux服务器并上传解压文件/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1381,129 +1506,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://weiqinl.com/2017/08/07/在webpack中使用Code-Splitting-代码分割来实现vue中的懒加载/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="weiqinl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="weiqinl">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/08/07/在webpack中使用Code-Splitting-代码分割来实现vue中的懒加载/" itemprop="url">在webpack中使用Code Splitting--代码分割来实现vue中的懒加载</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-07T17:05:59+08:00">
-                2017-08-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>当<a href="https://cn.vuejs.org/index.html" target="_blank" rel="noopener">Vue</a>应用程序越来越大，使用<a href="https://doc.webpack-china.org/guides/code-splitting/" target="_blank" rel="noopener">Webpack的代码分割</a>来<a href="https://doc.webpack-china.org/guides/lazy-loading/" target="_blank" rel="noopener">懒加载</a>组件，路由或者<a href="https://vuex.vuejs.org/zh-cn/" target="_blank" rel="noopener">Vuex</a>模块, 只有在需要时候才加载代码。</p>
-<p>我们可以在Vue应用程序中在三个不同层级应用懒加载和代码分割:</p>
-<ul>
-<li>组件，也称为<a href="https://cn.vuejs.org/v2/guide/components.html#异步组件" target="_blank" rel="noopener">异步组件</a></li>
-<li>路由</li>
-<li>Vuex 模块</li>
-</ul>
-<p>但是他们都有一些共同之处：自webpack2.0版本之后,他们都使用<a href="https://github.com/tc39/proposal-dynamic-import" target="_blank" rel="noopener">动态导入</a>[译者注：也可以参考<a href="https://doc.webpack-china.org/guides/code-splitting/#dynamic-imports" target="_blank" rel="noopener">这个</a>]。<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/08/07/在webpack中使用Code-Splitting-代码分割来实现vue中的懒加载/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1553,7 +1555,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-count">18</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

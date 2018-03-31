@@ -95,7 +95,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="vue,vue-cli," />
+  <meta name="keywords" content="Hexo, NexT, weiqinl, github" />
 
 
 
@@ -113,27 +113,23 @@
 
 
 
-<meta name="description" content="1. 前言vue-cli 一个简单的构建Vue.js项目的命令行界面 整体过程： $ npm install -g vue-cli  $ vue init webpack vue-admin  $ cd vue-admin  $ npm install  $ npm run dev  后面分步说明。">
-<meta name="keywords" content="vue,vue-cli">
+<meta name="description" content="js对象中的valueOf()方法和toString()方法非常类似，但是，当需要返回对象的原始值而非字符串的时候才调用它，尤其是转换为数字的时候。如果在需要使用原始值的上下文中使用了对象，JavaScript就会自动调用valueOf()方法。 valueOf()方法是Object的原型方法，每个对象都具有该方法，但是各对象返回的值有一定的区别。我们一起来看看。  Object.prototyp">
+<meta name="keywords" content="前端博客, JavaScript, html, css, jquery, NodeJs, web">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Vuejs实例-01使用vue-cli脚手架搭建Vue.js项目">
-<meta property="og:url" content="http://weiqinl.com/2017/06/29/Vuejs实例-01使用vue-cli脚手架搭建Vue-js项目/index.html">
+<meta property="og:title" content="JavaScript对象的valueOf()方法">
+<meta property="og:url" content="http://weiqinl.com/2018/03/31/JavaScript对象的valueOf-方法/index.html">
 <meta property="og:site_name" content="weiqinl">
-<meta property="og:description" content="1. 前言vue-cli 一个简单的构建Vue.js项目的命令行界面 整体过程： $ npm install -g vue-cli  $ vue init webpack vue-admin  $ cd vue-admin  $ npm install  $ npm run dev  后面分步说明。">
+<meta property="og:description" content="js对象中的valueOf()方法和toString()方法非常类似，但是，当需要返回对象的原始值而非字符串的时候才调用它，尤其是转换为数字的时候。如果在需要使用原始值的上下文中使用了对象，JavaScript就会自动调用valueOf()方法。 valueOf()方法是Object的原型方法，每个对象都具有该方法，但是各对象返回的值有一定的区别。我们一起来看看。  Object.prototyp">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://images2015.cnblogs.com/blog/564792/201705/564792-20170518211531385-7860564.png">
-<meta property="og:image" content="http://images2015.cnblogs.com/blog/564792/201705/564792-20170518211516994-1560191826.png">
-<meta property="og:image" content="http://images2015.cnblogs.com/blog/564792/201705/564792-20170518211446869-690496824.png">
-<meta property="og:image" content="http://images2015.cnblogs.com/blog/564792/201705/564792-20170519101621432-221179883.png">
-<meta property="og:image" content="http://images2015.cnblogs.com/blog/564792/201705/564792-20170518211346853-1070360488.png">
-<meta property="og:image" content="http://images2015.cnblogs.com/blog/564792/201705/564792-20170518211208697-1183076460.png">
-<meta property="og:image" content="http://images2015.cnblogs.com/blog/564792/201705/564792-20170518211307666-440031481.png">
-<meta property="og:image" content="http://images2015.cnblogs.com/blog/564792/201705/564792-20170518211847322-1043427083.png">
-<meta property="og:updated_time" content="2018-01-27T05:45:53.677Z">
+<meta property="og:image" content="http://images2017.cnblogs.com/blog/564792/201801/564792-20180129235451546-2056772811.png">
+<meta property="og:image" content="http://images2017.cnblogs.com/blog/564792/201801/564792-20180129235430343-552143799.png">
+<meta property="og:image" content="http://images2017.cnblogs.com/blog/564792/201801/564792-20180129235413140-100092005.png">
+<meta property="og:image" content="http://images2017.cnblogs.com/blog/564792/201801/564792-20180129235355750-1139685875.png">
+<meta property="og:updated_time" content="2018-03-31T02:13:05.499Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Vuejs实例-01使用vue-cli脚手架搭建Vue.js项目">
-<meta name="twitter:description" content="1. 前言vue-cli 一个简单的构建Vue.js项目的命令行界面 整体过程： $ npm install -g vue-cli  $ vue init webpack vue-admin  $ cd vue-admin  $ npm install  $ npm run dev  后面分步说明。">
-<meta name="twitter:image" content="http://images2015.cnblogs.com/blog/564792/201705/564792-20170518211531385-7860564.png">
+<meta name="twitter:title" content="JavaScript对象的valueOf()方法">
+<meta name="twitter:description" content="js对象中的valueOf()方法和toString()方法非常类似，但是，当需要返回对象的原始值而非字符串的时候才调用它，尤其是转换为数字的时候。如果在需要使用原始值的上下文中使用了对象，JavaScript就会自动调用valueOf()方法。 valueOf()方法是Object的原型方法，每个对象都具有该方法，但是各对象返回的值有一定的区别。我们一起来看看。  Object.prototyp">
+<meta name="twitter:image" content="http://images2017.cnblogs.com/blog/564792/201801/564792-20180129235451546-2056772811.png">
 
 
 
@@ -161,13 +157,13 @@
 
 
 
-  <link rel="canonical" href="http://weiqinl.com/2017/06/29/Vuejs实例-01使用vue-cli脚手架搭建Vue-js项目/"/>
+  <link rel="canonical" href="http://weiqinl.com/2018/03/31/JavaScript对象的valueOf-方法/"/>
 
 
 
 
 
-  <title>Vuejs实例-01使用vue-cli脚手架搭建Vue.js项目 | weiqinl</title>
+  <title>JavaScript对象的valueOf()方法 | weiqinl</title>
   
 
 
@@ -325,7 +321,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://weiqinl.com/2017/06/29/Vuejs实例-01使用vue-cli脚手架搭建Vue-js项目/">
+    <link itemprop="mainEntityOfPage" href="http://weiqinl.com/2018/03/31/JavaScript对象的valueOf-方法/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="weiqinl">
@@ -342,7 +338,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">Vuejs实例-01使用vue-cli脚手架搭建Vue.js项目</h2>
+          <h2 class="post-title" itemprop="name headline">JavaScript对象的valueOf()方法</h2>
         
 
         <div class="post-meta">
@@ -354,8 +350,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-29T10:54:36+08:00">
-                2017-06-29
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-31T10:08:52+08:00">
+                2018-03-31
               </time>
             
 
@@ -373,7 +369,7 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a class="cloud-tie-join-count" href="/2017/06/29/Vuejs实例-01使用vue-cli脚手架搭建Vue-js项目/#comments" itemprop="discussionUrl">
+                <a class="cloud-tie-join-count" href="/2018/03/31/JavaScript对象的valueOf-方法/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count join-count" itemprop="commentCount"></span>
                 </a>
               </span>
@@ -399,93 +395,20 @@
       
 
       
-        <h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h2><p><code>vue-cli</code> 一个简单的构建<code>Vue.js</code>项目的命令行界面</p>
-<p>整体过程：</p>
-<pre><code>$ npm install -g vue-cli 
-$ vue init webpack vue-admin 
-$ cd vue-admin 
-$ npm install 
-$ npm run dev 
-</code></pre><p>后面分步说明。<br><a id="more"></a></p>
-<h2 id="2-安装"><a href="#2-安装" class="headerlink" title="2. 安装"></a>2. 安装</h2><p>前提条件，Node.js &gt;=4.x版本，建议使用6.x版本。npm版本 &gt; 3.x<br>全局安装vue-cli</p>
-<pre><code>$ npm install -g vue-cli 
-</code></pre><p><img src="http://images2015.cnblogs.com/blog/564792/201705/564792-20170518211531385-7860564.png" alt="vue-cli-install" title="vue-cli-install"></p>
-<p>…<br><img src="http://images2015.cnblogs.com/blog/564792/201705/564792-20170518211516994-1560191826.png" alt="vue-cli-install" title="vue-cli-install"></p>
-<h2 id="3-使用"><a href="#3-使用" class="headerlink" title="3. 使用"></a>3. 使用</h2><pre><code>$ vue init &lt;template-name&gt; &lt;project-name&gt; 
-</code></pre><p>vue官方提供了多个打包工具版本的模版。我们可以使用<code>vue list</code>命令查看，当前可以使用的模版。</p>
-<pre><code>$ vue list 
-</code></pre><p><img src="http://images2015.cnblogs.com/blog/564792/201705/564792-20170518211446869-690496824.png" alt="vue list" title="vue list"></p>
-<p>我们在这里，使用<code>webpack</code>模版。 功能齐全的<code>webpack</code>&amp; <code>vue-loader</code> 提供热加载、代码检查、单元测试和css分离</p>
-<pre><code>$ vue init webpack vue-element-admin
-</code></pre><p><img src="http://images2015.cnblogs.com/blog/564792/201705/564792-20170519101621432-221179883.png" alt="vue init" title="vue init"></p>
-<p>之后，在<code>E：\project</code>文件夹下面，会有刚初始化的构建的项目<code>vue-element-admin</code></p>
-<p><img src="http://images2015.cnblogs.com/blog/564792/201705/564792-20170518211346853-1070360488.png" alt="project file" title="project file"></p>
-<h2 id="4-运行结果"><a href="#4-运行结果" class="headerlink" title="4. 运行结果"></a>4. 运行结果</h2><p>项目基础结构已经搭建好了，现在来启动它。<br>进入项目文件:</p>
-<pre><code>$ cd vue-element-admin 
-</code></pre><p>安装依赖：</p>
-<p>中国行情原因，直接安装，有时候会失败。我们一般使用npm的淘宝镜像cnpm。<br>先安装cnpm：</p>
-<pre><code>$ npm install -g cnpm --registry=https://registry.npm.taobao.org
-</code></pre><p>之后，使用:</p>
-<pre><code>$ cnpm install 
-</code></pre><p>你直接安装也可以的：</p>
-<pre><code>$ npm install 
-</code></pre><p>运行：</p>
-<pre><code>$ npm run dev
-</code></pre><p><img src="http://images2015.cnblogs.com/blog/564792/201705/564792-20170518211208697-1183076460.png" alt="npm run dev" title="npm run dev"></p>
-<p>启动之后，自动打开默认浏览器 </p>
-<p><img src="http://images2015.cnblogs.com/blog/564792/201705/564792-20170518211307666-440031481.png" alt="admin page" title="主界面"></p>
-<p>之后，就可以进行本地开发，实时预览开发效果。</p>
-<h2 id="5-打包部署"><a href="#5-打包部署" class="headerlink" title="5. 打包部署"></a>5. 打包部署</h2><p>项目开发完成之后，可以使用<code>npm run build</code>进行打包工作</p>
-<pre><code>$ npm run build
-</code></pre><p>打包完成之后，会生成<code>dist</code>文件夹，项目上线时候，只需要将<code>dist</code>文件夹放到服务器就行了。</p>
-<h2 id="6-项目结构"><a href="#6-项目结构" class="headerlink" title="6. 项目结构"></a>6. 项目结构</h2><p><img src="http://images2015.cnblogs.com/blog/564792/201705/564792-20170518211847322-1043427083.png" alt="项目结构" title="项目结构"></p>
-<pre><code>vue-element-admin:             项目名称 
-|   .babelrc                   babel的配置文件 
-|   .editorconfig              编辑器的配置文件 
-|   .gitignore                 git的忽略文件 
-|   .postcssrc.js              编译css的工具 
-|   index.html                 网站主页 
-|   package.json               项目依赖哪些包的文件 
-|   README.md                  说明文档 
-|  
-+---build                      构建的配置文件夹 
-|       build.js               项目构建配置入口
-|       check-versions.js
-|       dev-client.js
-|       dev-server.js
-|       utils.js
-|       vue-loader.conf.js
-|       webpack.base.conf.js
-|       webpack.dev.conf.js
-|       webpack.prod.conf.js
-|       webpack.test.conf.js
-|      
-+---config                      整体的配置文件夹
-|       dev.env.js
-|       index.js                配置文件入口
-|       prod.env.js
-|       test.env.js
-|      
-+---src                         源文件夹
-|   |   App.vue                 布局组件
-|   |   main.js                 入口文件
-|   |  
-|   +---assets                  静态文件夹
-|   |       logo.png
-|   |      
-|   +---components              组件文件夹
-|   |       Hello.vue           单个组件
-|   |      
-|   \---router                  路由文件夹
-|           index.js            路由主页
-|          
-+---static                      静态文件夹
-|       .gitkeep                空文件（Git本身不允许全空目录提交至版本库，一个办法是在目录下创建一个文件，取名为.gitkeep是习惯用法）
-|      
-\---test                        测试文件夹
-</code></pre><h2 id="7-总结"><a href="#7-总结" class="headerlink" title="7. 总结"></a>7. 总结</h2><p>  万事开头难，前期项目搭建可能会遇到一些问题，冷静分析慢慢都能解决的。</p>
-<h2 id="8-项目源码"><a href="#8-项目源码" class="headerlink" title="8. 项目源码"></a>8. 项目源码</h2><p><a href="http://www.cnblogs.com/weiqinl/p/6873761.html" target="_blank" rel="noopener">Vuejs实例-Vuejs2.0全家桶结合ELementUI制作后台管理系统</a><br><a href="https://github.com/weiqinl/vue-element-admin" target="_blank" rel="noopener">git项目源码</a></p>
-<p>项目首发于博客园：<a href="http://www.cnblogs.com/weiqinl/p/6875645.html" target="_blank" rel="noopener">Vuejs实例-01使用vue-cli脚手架搭建Vue.js项目</a></p>
+        <p>js对象中的<code>valueOf()</code>方法和<code>toString()</code>方法非常类似，但是，当需要返回对象的原始值而非字符串的时候才调用它，尤其是转换为数字的时候。如果在需要使用原始值的上下文中使用了对象，JavaScript就会自动调用<code>valueOf()</code>方法。</p>
+<p><code>valueOf()</code>方法是<code>Object</code>的原型方法，每个对象都具有该方法，但是各对象返回的值有一定的区别。我们一起来看看。 </p>
+<h2 id="Object-prototype-valueOf"><a href="#Object-prototype-valueOf" class="headerlink" title="Object.prototype.valueOf()"></a>Object.prototype.valueOf()</h2><p>JavaScript调用<code>valueOf()</code>方法将对象转换为原始值。你很少需要自己调用<code>valueOf()</code>方法； </p>
+<p>默认情况下，<code>valueOf()</code>方法由Object后面的每个对象继承。每个内置的核心对象都会覆盖此方法以放回适当的值。<br>如果对象没有原始值，则<code>valueOf()</code>将返回对象本身。</p>
+<p>你可以在自己的代码中使用<code>valueOf()</code>将内置对象转换为原始值。创建自定义对象时，可以覆盖<code>Object.prototype.valueOf()</code>来调用自定义方法，而不是默认<code>Object</code>方法。</p>
+<h3 id="覆盖自定义对象的valueOf-方法"><a href="#覆盖自定义对象的valueOf-方法" class="headerlink" title="覆盖自定义对象的valueOf()方法"></a>覆盖自定义对象的<code>valueOf()</code>方法</h3><p>你可以创建一个取代<code>valueOf()</code>方法的函数，你的方法必须不能传入参数。<br>假设你有个对象叫<code>MyNumberType</code>而你想为它创建一个<code>valueOf()</code>方法。下面的代码为<code>valueOf()</code>方法赋予了一个自定义函数:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MyNumberType.prototype.valueOf = function() &#123; return customPrimitiveValue; &#125;;</span><br></pre></td></tr></table></figure></p>
+<p>有了这样的一个方法，下一次每当<code>MyNumberType</code>要被转换为原始类型值时，JavaScript在此之前会自动调用自定义的<code>valueOf()</code>方法。<br><code>valueOf()</code>方法一般都会被JavaScript自动调用，但你也可以像下面代码那样自己调用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">myNumberType.valueOf()</span><br></pre></td></tr></table></figure></p>
+<h2 id="String-prototype-valueOf"><a href="#String-prototype-valueOf" class="headerlink" title="String.prototype.valueOf()"></a>String.prototype.valueOf()</h2><p>语法：<code>strObj.valueOf()</code><br>返回值：表示给定<code>String</code>对象的原始值<br>说明：<code>valueOf()</code>方法返回一个<code>String</code>对象的原始值，该值等同于<code>String.prototype.toString()</code>。<br>该方法通常在JavaScript内部被调用，而不是在代码里显示调用。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let x = new String(&apos;Hello world&apos;)</span><br><span class="line">console.log(x.valueOf())   // Hello world</span><br></pre></td></tr></table></figure></p>
+<p><img src="http://images2017.cnblogs.com/blog/564792/201801/564792-20180129235451546-2056772811.png" alt="String.prototype.valueOf()"></p>
+<h2 id="Date-prototype-valueOf"><a href="#Date-prototype-valueOf" class="headerlink" title="Date.prototype.valueOf()"></a>Date.prototype.valueOf()</h2><p>语法：<code>dataObj.valueOf()</code><br>返回值：表示给定<code>Date</code>对象的原始值<br>说明：<code>valueOf()</code>方法返回以数值格式表示的一个<code>Date</code>对象的原始值。该值从1970年1月1日0时0分0秒（UTC，即协调世界时）到该日期对象所代表时间的毫秒数。<br>该方法的功能和<code>Date.prototype.getTime()</code>方法一样。<br>该方法通常在JavaScript内部调用，而不是在代码中显示调用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var x = new Date(2018, 1, 12)</span><br><span class="line">var myVar = x.valueOf()</span><br><span class="line">console.log(myVar) // 1518364800000</span><br></pre></td></tr></table></figure>
+<h2 id="Number-prototype-valueOf"><a href="#Number-prototype-valueOf" class="headerlink" title="Number.prototype.valueOf()"></a>Number.prototype.valueOf()</h2><p>语法： <code>numObj.valueOf()</code><br>返回值：表示给定<code>Number</code>对象的原始值。<br>说明：该方法通常在JavaScript内部调用，而不是在代码中显示调用。覆盖<code>Object.prototype.valueOf()</code>方法<br>案例：<br><img src="http://images2017.cnblogs.com/blog/564792/201801/564792-20180129235430343-552143799.png" alt="Number.prototype.valueOf()"></p>
+<h2 id="Boolean-prototype-valueOf"><a href="#Boolean-prototype-valueOf" class="headerlink" title="Boolean.prototype.valueOf()"></a>Boolean.prototype.valueOf()</h2><p>语法：<code>bool.valueOf()</code><br>返回值： 返回给定<code>Boolean</code>对象的原始值<br>说明： <code>Boolean</code>的<code>valueOf()</code>方法返回一个<code>Boolean</code>字面量的原始值作为布尔数据类型。该方法通常在JavaScript内部调用，而不是在代码中显示调用。<br>案例：<br><img src="http://images2017.cnblogs.com/blog/564792/201801/564792-20180129235413140-100092005.png" alt="Boolean.prototype.valueOf()"></p>
+<h2 id="Symbol-prototype-valueOf"><a href="#Symbol-prototype-valueOf" class="headerlink" title="Symbol.prototype.valueOf()"></a>Symbol.prototype.valueOf()</h2><p>语法： <code>Symbol().valueOf()</code><br>返回值：返回给定<code>Symbol</code>对象的原始值<br>说明：<code>Symbol</code>的<code>valueOf()</code>方法返回<code>Symbol</code>对象的原始值作为<code>Symbol</code>数据类型。JavaScript调用<code>valueOf()</code>方法将对象转换为原始值。你很少需要自己调用<code>valueOf()</code>方法。当遇到期望有原始值的对象时，JavaScript会自动调用它。<br>案例：<br><img src="http://images2017.cnblogs.com/blog/564792/201801/564792-20180129235355750-1139685875.png" alt=" Symbol.prototype.valueOf()"><br>[完]</p>
 
       
     </div>
@@ -534,14 +457,6 @@ $ npm run dev
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/vue/" rel="tag"># vue</a>
-          
-            <a href="/tags/vue-cli/" rel="tag"># vue-cli</a>
-          
-        </div>
-      
 
       
       
@@ -551,8 +466,8 @@ $ npm run dev
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/06/21/使用Github-Hexo框架搭建部署自己的博客/" rel="next" title="使用Github+Hexo框架搭建部署自己的博客">
-                <i class="fa fa-chevron-left"></i> 使用Github+Hexo框架搭建部署自己的博客
+              <a href="/2018/01/27/mac通过自带的ssh连接Linux服务器并上传解压文件/" rel="next" title="mac通过自带的ssh连接Linux服务器并上传解压文件">
+                <i class="fa fa-chevron-left"></i> mac通过自带的ssh连接Linux服务器并上传解压文件
               </a>
             
           </div>
@@ -560,10 +475,6 @@ $ npm run dev
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/06/30/Datatables插件1-10-15版本服务器处理模式ajax获取分页数据实例解析/" rel="prev" title="Datatables插件1.10.15版本服务器处理模式ajax获取分页数据实例解析">
-                Datatables插件1.10.15版本服务器处理模式ajax获取分页数据实例解析 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -718,7 +629,7 @@ $ npm run dev
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-前言"><span class="nav-number">1.</span> <span class="nav-text">1. 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-安装"><span class="nav-number">2.</span> <span class="nav-text">2. 安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-使用"><span class="nav-number">3.</span> <span class="nav-text">3. 使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-运行结果"><span class="nav-number">4.</span> <span class="nav-text">4. 运行结果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-打包部署"><span class="nav-number">5.</span> <span class="nav-text">5. 打包部署</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-项目结构"><span class="nav-number">6.</span> <span class="nav-text">6. 项目结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-总结"><span class="nav-number">7.</span> <span class="nav-text">7. 总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-项目源码"><span class="nav-number">8.</span> <span class="nav-text">8. 项目源码</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Object-prototype-valueOf"><span class="nav-number">1.</span> <span class="nav-text">Object.prototype.valueOf()</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#覆盖自定义对象的valueOf-方法"><span class="nav-number">1.1.</span> <span class="nav-text">覆盖自定义对象的valueOf()方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#String-prototype-valueOf"><span class="nav-number">2.</span> <span class="nav-text">String.prototype.valueOf()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Date-prototype-valueOf"><span class="nav-number">3.</span> <span class="nav-text">Date.prototype.valueOf()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Number-prototype-valueOf"><span class="nav-number">4.</span> <span class="nav-text">Number.prototype.valueOf()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Boolean-prototype-valueOf"><span class="nav-number">5.</span> <span class="nav-text">Boolean.prototype.valueOf()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Symbol-prototype-valueOf"><span class="nav-number">6.</span> <span class="nav-text">Symbol.prototype.valueOf()</span></a></li></ol></div>
             
 
           </div>
