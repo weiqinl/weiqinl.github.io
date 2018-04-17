@@ -317,6 +317,155 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://weiqinl.com/2018/04/17/Javascript数据类型的非常6-1/Javascript数据类型的非常6-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="weiqinl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="weiqinl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/17/Javascript数据类型的非常6-1/Javascript数据类型的非常6-1/" itemprop="url">Javascript数据类型的非常6+1</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-17T11:16:01+08:00">
+                2018-04-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="动态类型"><a href="#动态类型" class="headerlink" title="动态类型"></a>动态类型</h1><p>JavaScript是一种弱类型或者说动态语言。这意味着你不用提前声明变量的类型，在程序运行过程中，类型会被自动确定。这也意味着你可以使用同一个变量保存不同类型的数据<br><img src="/2018/04/17/Javascript数据类型的非常6-1/Javascript数据类型的非常6-1/43331776.png" alt="数据测试图"></p>
+<h1 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h1><p>最新的ECMAScript标准定义了7种数据类型；<br>其中六种基础数据类型(primitive type)：Undefined、Null、Boolean、Number、String、Symbol(es6 新增）。<br>一种引用类型：Object。</p>
+<p>使用<code>typeof</code>运算符来判断一个值是否在某种类型的范围内。可以用这种运算符判断一个值是否表示一种原始类型：如果它是原始类型，还可以判断它表示哪种原始类型。<br>使用<code>instanceof</code>运算符用来测试一个对象在其原型链中是否存在一个构造函数的 <code>prototype</code> 属性。</p>
+<p>以下，我们分别看看，基础数据类型有哪些特性，引用类型如何存储判断的。</p>
+<h2 id="原始值"><a href="#原始值" class="headerlink" title="原始值"></a>原始值</h2><p><strong>除 Object 以外的所有类型的值本身无法被改变，我们称这些类型的值为 <code>原始值</code></strong>。<br>大多数时候，原始值直接代表语言实现的最底层。<br>原始值是存储在栈(stack)中的简单数据段，也就是说，它们的值直接存储在变量访问的位置。</p>
+<p>ECMA-262把术语类型(type)定义为值的一个集合，每种基础数据类型定义了它包含的值的范围及其字面量表示形式。</p>
+<h3 id="Undefined-类型"><a href="#Undefined-类型" class="headerlink" title="Undefined 类型"></a>Undefined 类型</h3><p>Undefined类型只有一个值，即<code>undefined</code>。当声明的变量未初始化时，该变量的默认值为<code>undefined</code>。<br><img src="/2018/04/17/Javascript数据类型的非常6-1/Javascript数据类型的非常6-1/33567909.png" alt="数据测试图-undefined"></p>
+<p>声明的oTemp变量，没有初始值。该变量将被赋予值undefined，即undefined类型的字面量。<br>oTemp1没有定义，导致报 引用错误。</p>
+<h3 id="Null类型"><a href="#Null类型" class="headerlink" title="Null类型"></a>Null类型</h3><p>Null类型只有一个值： <code>null</code>。值<code>null</code>是一个JavaScript字面量，表示空值(null or an “empty” value)，即没有对象被呈现。<br><img src="/2018/04/17/Javascript数据类型的非常6-1/Javascript数据类型的非常6-1/52190561.png" alt="数据测试图-null"></p>
+<p>在这里要说明的是：在JavaScript中，null是基础数据类型，但是typeof判断为object，这是由于历史原因造成的。<br>在JavaScript最初的实现中，JavaScript中的值是由一个表示类型的标签和实际数据值表示的。对象的类型标签是0。由于<code>null</code>代表的是空指针(大多数平台下值为0x00），因此，null使用0作为类型标签，<code>typeof null</code>就返回了”object”。</p>
+<h3 id="Boolean-布尔类型"><a href="#Boolean-布尔类型" class="headerlink" title="Boolean 布尔类型"></a>Boolean 布尔类型</h3><p>布尔表示一个逻辑实体，可以有两个值： <code>true</code> 和 <code>false</code>。<br><img src="/2018/04/17/Javascript数据类型的非常6-1/Javascript数据类型的非常6-1/55328415.png" alt="数据测试图-Boolean 布尔类型"></p>
+<p>注意点：<br>由于js中区分大小写，因此<code>True</code> 和 <code>False</code> 都不是<code>Boolean</code>值。</p>
+<p>任意的JavaScript的值都可以转换为布尔值。<code>undefined</code>,<code>null</code>, <code>0</code>,<code>-0</code>,<code>NaN</code>,<code>&quot;&quot;</code>这6个值,再加上<code>false</code>本身共7个值都会转换为<code>false</code></p>
+<h3 id="Number-数字类型"><a href="#Number-数字类型" class="headerlink" title="Number 数字类型"></a>Number 数字类型</h3><p>在JavaScript中只有一种数字类型：基于IEEE 754 标准的双精度64位二进制格式的值（ -(253 -1) 到  253 -1）。这种类型可以表示32位的整数，也可以表示64位的浮点数，还能有一些带符号的值：<code>+Infinity</code>,<code>-Infinity</code>和<code>NaN</code>(非数值，Not-a-Number)。<br>直接输入的任何数字都可以看做Number类型的字面量。例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var iNum = 86;  // 此代码声明了存放整数值的变量，它的值由字面量86定义。</span><br></pre></td></tr></table></figure></p>
+<h4 id="进制数"><a href="#进制数" class="headerlink" title="进制数"></a>进制数</h4><p>通常，我们所说的整数都是以十进制来表示。但是，在计算机学科，也有其他进制，比如二进制、八进制、十六进制。<br>在JavaScript中，能准确识别十进制，十六进制整数。八进制整数要看情况识别。<br>八进制字面量的首数字必须是0，其后的数字可以是任何八进制数字(0-7)。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var iNum = 070; // 070 等于十进制的 56</span><br></pre></td></tr></table></figure></p>
+<p>虽然JavaScript的某些实现可以允许采用八进制形式表示整数。但是，ECMAScript 6的严格模式下，八进制字面量是明令禁止的。因此，最好不要使用以0位前缀的整型字面量。<br>十六进制字面量的首数字必须是0，后面接字母x，然后是任意的十六进制数字（0 到 9 和 A 到 F）。这些字母可以是大写的，也可以是小写的。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var iNum = 0x1f; // 0x1f 等于十进制的 31</span><br><span class="line">var iMum = 0xAB; // 0xAB 等于十进制的 171</span><br></pre></td></tr></table></figure></p>
+<p><strong>注意</strong>：尽管所有整数都可以表示为八进制或十六进制的字面量，但所有数学运算返回的都是十进制结果。</p>
+<h4 id="浮点数"><a href="#浮点数" class="headerlink" title="浮点数"></a>浮点数</h4><p>要定义浮点值，必须包括小数点和小数点后的一位数字（例如，用1.0而不是1）。这被看作浮点数字面量。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var fNum = 5.0;</span><br></pre></td></tr></table></figure></p>
+<p><strong>对于浮点字面量，在用它进行计算前，真正存储的是字符串 </strong></p>
+<p>JavaScript中的数字具有足够的精度，并可以极其近似于0.1。但是，数字不能精确表述也会带来一些问题。<br><img src="/2018/04/17/Javascript数据类型的非常6-1/Javascript数据类型的非常6-1/41773983.png" alt="数据测试图-浮点数"></p>
+<p>由于四舍五入误差，上述代码中的”x” 实际上并不等于 “y”。这个问题，在任何使用二进制浮点数的编程语言中都会出现。不过，上述代码中的x和y的值非常接近彼此和最终的正确值。这种结果可以胜任大多数计算任务。不相等的问题只有在比较的时候才会出现。</p>
+<h4 id="特殊的Number值"><a href="#特殊的Number值" class="headerlink" title="特殊的Number值"></a>特殊的Number值</h4><p><code>Number对象</code>是经过封装的能让你处理数字值的对象。它由<code>Number()</code>构造器创建。<code>Number对象</code>的属性都是<code>Number</code>类型。比如，前两个是<code>Number.MAX_VALUE</code> 和 <code>Number.MIN_VALUE</code>。它们定义了<code>Number</code>值集合的外边界。<code>Number.MIN_SAFE_INTEGER</code>和<code>Number.MAX_SAFE_INTEGER</code>，分别表示最小的安全整数，最大的安全整数。<br><code>Number.NaN</code>表示特殊的”非数字”值。以下是一些例子：<br><img src="/2018/04/17/Javascript数据类型的非常6-1/Javascript数据类型的非常6-1/49428673.png" alt="数据测试图-特殊的Number值"></p>
+<h4 id="NaN"><a href="#NaN" class="headerlink" title="NaN"></a>NaN</h4><p><code>NaN</code> 是一个奇怪的特殊值。一般来说，这种情况发生在类型转换失败时。例如，要把单词 blue 转换成数值就会失败，因为没有与之等价的数值。与无穷大一样，<code>NaN</code>也不能用于算术计算。<code>NaN</code>的另一个奇特之处在于，它与自身不相等，这意味着下面的代码将返回false;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alert(NaN == NaN); // false</span><br></pre></td></tr></table></figure></p>
+<p>出于这个原因，不推荐使用  <code>NaN</code> 值本身。建议使用函数<code>Number.isNaN()</code>或者 <code>isNaN()</code>：<br><code>isNaN()</code>是全局函数，会强制将参数转换为数字，用来确定一个值是否为<code>NaN</code>，<br>es6中定义的<code>Number.isNaN()</code>函数，不会强制将参数转换为数字，只有在参数是真正的数字类型，且值为<code>NaN</code>的时候才会返回<code>true</code>。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">alert(Number.isNaN(&apos;blue&apos;)); // false</span><br><span class="line">alert(isNaN(&apos;blue&apos;)); // true</span><br><span class="line">alert(Number.isNaN(666)); // false</span><br><span class="line">alert(isNaN(666)); // false</span><br><span class="line">alert(Number.isNaN(0 / 0)); // true</span><br><span class="line">alert(isNaN(0 / 0); // true</span><br></pre></td></tr></table></figure></p>
+<p><img src="/2018/04/17/Javascript数据类型的非常6-1/Javascript数据类型的非常6-1/58823483.png" alt="数据测试图-NaN"></p>
+<h3 id="String-字符串类型"><a href="#String-字符串类型" class="headerlink" title="String 字符串类型"></a>String 字符串类型</h3><p>JavaScript的字符串类型用于表示文本数据。它是一组16位的无符号整数值的“元素”。在字符串种的每个元素占据了字符串的位置。第一个元素的索引为0，下一个是索引1，依此类推。字符串的长度是它的元素的数量。<br>字符串类型有个特色叫<code>immutable</code>，这意味着字符串一旦被创建，本身是不能被修改的。当使用<code>String.prototype.methods</code>做任何操作都不会影响到原字符串，但是，可以基于对原始字符串的操作来创建新的字符串。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var str = &quot;test&quot;</span><br><span class="line">str.len = 4   //  这里修改的只是临时对象，之后立马销毁</span><br><span class="line">var t = str.len</span><br><span class="line">console.log(t); // 由于str没有len这个属性，所有会输出 undefined</span><br></pre></td></tr></table></figure></p>
+<p><img src="/2018/04/17/Javascript数据类型的非常6-1/Javascript数据类型的非常6-1/36709921.png" alt="数据测试图-String 字符串类型"></p>
+<h3 id="Symbol-符号类型"><a href="#Symbol-符号类型" class="headerlink" title="Symbol 符号类型"></a>Symbol 符号类型</h3><p>符号(Symbols)是ECMAScript 6新定义的。<code>Symbol()</code>函数返回<code>symbol</code>类型的值，都是唯一的，不相等的，并且具有静态属性和静态方法。<code>symbol值</code>可以用来作为对象属性的标识符，这是<code>Symbol数据类型</code>的唯一目的。<br>在某些语言中也有类似原子类型(Atoms)，你也可以认为它们是C里面的枚举类型。<br><img src="/2018/04/17/Javascript数据类型的非常6-1/Javascript数据类型的非常6-1/48199609.png" alt="数据测试图-Symbol 符号类型"></p>
+<h2 id="Objects"><a href="#Objects" class="headerlink" title="Objects"></a>Objects</h2><p>与原始类型对应的是引用类型。引用类型通常叫做类(class)，也就是说，遇到引用值，所处理的就是对象。</p>
+<p>引用值是存储在堆(heap)中的对象，也就是说，存储在变量处的值是一个指针(point)，指向存储对象的内存处。<br>在内存中可以被 标识符引用的一块区域。</p>
+<p>ECMAScript中的所有对象都由这个对象继承而来，Object对象中的所有属性和方法都会出现在其他对象中。</p>
+<p><strong>数组</strong>、<strong>对象</strong>、<strong>函数</strong>等都被称为复杂对象。</p>
+<p>参考： </p>
+<ol>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures" target="_blank" rel="noopener">JavaScript数据类型和数据结构</a></li>
+<li><a href="http://www.w3school.com.cn/js/pro_js_primitivetypes.asp" target="_blank" rel="noopener">ECMAScript原始类型</a></li>
+<li><a href="http://www.w3school.com.cn/js/pro_js_referencetypes.asp" target="_blank" rel="noopener">ECMAScript引用类型</a></li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://weiqinl.com/2018/03/31/JavaScript对象的valueOf-方法/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -509,7 +658,7 @@
 
       
         
-          <h1 id="需求："><a href="#需求：" class="headerlink" title="需求："></a>需求：</h1><p>1：mac连接linux服务器<br>2：将mac上的文件上传到linux服务器指定位置<br>3：解压文件<br>mac上使用命令，推荐使用 <a href="https://www.iterm2.com/downloads.html" target="_blank" rel="noopener">iterm2</a> 。当然，也可以使用mac自带的终端工具。<br>
+          <h1 id="需求："><a href="#需求：" class="headerlink" title="需求："></a>需求：</h1><p>1：mac连接linux服务器<br>2：将mac上的文件上传到linux服务器指定位置<br>3：解压文件<br>mac上使用命令，推荐使用 <a href="https://www.iterm2.com/downloads.html" target="_blank" rel="noopener">iterm2</a> 。当然，也可以使用mac自带的终端工具。<br></p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/01/27/mac通过自带的ssh连接Linux服务器并上传解压文件/#more" rel="contents">
@@ -880,7 +1029,7 @@
 <li>通过引用不同的link文件，达到效果。</li>
 <li>ElementUI的这种方式，详情见<a href="https://github.com/ElemeFE/element/issues/3054" target="_blank" rel="noopener">ISSUE</a><br>（1） 先把默认主题文件中涉及到颜色的 CSS 值替换成关键词<br>（2） 根据用户选择的主题色生成一系列对应的颜色值<br>（3） 把关键词再换回刚刚生成的相应的颜色值<br>（4） 直接在页面上加 style 标签，把生成的样式填进去</li>
 </ul>
-<p>我目前用的是第一种方式，把操作过程记录下来，方便以后查看。<br>
+<p>我目前用的是第一种方式，把操作过程记录下来，方便以后查看。<br></p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/11/30/关于网站切换主题色的一些思考与实现/#more" rel="contents">
@@ -998,7 +1147,7 @@
         
           <p><a href="https://github.com/coreybutler/nvm-windows/releases" target="_blank" rel="noopener">nvm最新的下载地址</a></p>
 <p>Node版本管理器–nvm，可以运行在多种操作系统上。nvm for windows 是使用go语言编写的软件。 我电脑使用的是Windows操作系统，所以我要记录下在此操作系统上nvm的安装和使用。</p>
-<h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p>nvm-windows 最新下载地址：<br><a href="https://github.com/coreybutler/nvm-windows/releases" target="_blank" rel="noopener">https://github.com/coreybutler/nvm-windows/releases</a><br>
+<h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p>nvm-windows 最新下载地址：<br><a href="https://github.com/coreybutler/nvm-windows/releases" target="_blank" rel="noopener">https://github.com/coreybutler/nvm-windows/releases</a><br></p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/09/21/Windows上安装nodejs版本管理器nvm/#more" rel="contents">
@@ -1232,7 +1381,7 @@
         
           <p>#vue-cli生成的webpack配置解析-build/dev-server.js</p>
 <p>我们在使用vue-cli搭建vuejs项目(<a href="http://www.cnblogs.com/weiqinl/p/6875645.html" target="_blank" rel="noopener">Vuejs实例-01使用vue-cli脚手架搭建Vue.js项目</a>)的时候，会自动生成一系列文件，其中就包含webpack配置文件。我们现在来看下，这些配置到底是什么意思，对我们开发过程中有什么影响。</p>
-<p>项目搭建好了， 使用Bash运行<code>npm run dev</code>， 然后Bash界面会打印出一些东西，之后默认浏览器就打开了一个页面。为什么会有这些动作呢？我们从<code>package.json</code>开始看。<br>
+<p>项目搭建好了， 使用Bash运行<code>npm run dev</code>， 然后Bash界面会打印出一些东西，之后默认浏览器就打开了一个页面。为什么会有这些动作呢？我们从<code>package.json</code>开始看。<br></p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/08/18/vue-cli生成的webpack配置解析-build-dev-server-js/#more" rel="contents">
@@ -1348,128 +1497,10 @@
 
       
         
-          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p><code>webpack</code> 是一个当下最流行的前端资源的模块打包器。当 <code>webpack</code> 处理应用程序时，它会递归地构建一个依赖关系图(<code>dependency graph</code>)，其中包含应用程序需要的每个模块，然后将所有这些模块打包成少量的<code>bundle</code> - 通常只有一个，由浏览器加载。<br>
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p><code>webpack</code> 是一个当下最流行的前端资源的模块打包器。当 <code>webpack</code> 处理应用程序时，它会递归地构建一个依赖关系图(<code>dependency graph</code>)，其中包含应用程序需要的每个模块，然后将所有这些模块打包成少量的<code>bundle</code> - 通常只有一个，由浏览器加载。<br></p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/08/17/webpack的四个核心概念介绍/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://weiqinl.com/2017/08/12/ECMAScript6-let与const命令详解/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="weiqinl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="weiqinl">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/08/12/ECMAScript6-let与const命令详解/" itemprop="url">ECMAScript6-let与const命令详解</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-12T11:13:52+08:00">
-                2017-08-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>《ECMAScript入门》是一本开源的JavaScript语言教程，全面介绍ECMAScript6新引入的语法特性。<br>let和const命令，是第一章开始介绍，也是比较基础的知识。我在学习之后，把它总结记录下来，以便自己以后复习查看。<br><strong>以下代码，于Chrome57 DevTools运行</strong><br> <strong>node为6.3版本</strong></p>
-<h2 id="先总结"><a href="#先总结" class="headerlink" title="先总结"></a>先总结</h2><p> 先总结区别，再分别阐述</p>
-<h3 id="let-与-const-相同点和区别"><a href="#let-与-const-相同点和区别" class="headerlink" title="let 与 const 相同点和区别"></a>let 与 const 相同点和区别</h3><p>1：<code>let</code>命令用来声明变量，用法类似于<code>var</code>，但是所声明的变量。<br>   <code>const</code>声明一个只读的常量，一旦声明，常量的值就不能改变。<br>   <code>const</code>保证的是内存地址不得改动。常量（内存地址保存的是值），复合类型的数据（内存地址保存的是指针）<br>2：两者都不存在变量提升。<br>3：两者都有暂时性死区(TDZ)。<br>4：两者都不允许重复声明。<br>5：两者为JavaScript新增了块级作用域。两者作用域，只在声明所在的块级作用域有效。<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/08/12/ECMAScript6-let与const命令详解/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1555,7 +1586,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1568,7 +1599,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-count">23</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
