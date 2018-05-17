@@ -449,8 +449,8 @@
 <p>通过前置所有规则及使用<code>!</code>, 可以对应覆盖到配置中的任意<code>loader</code>。<br>选项可以传递查询参数，例如 <code>?key=value&amp;foo=bar</code>，或者一个 JSON 对象，例如 <code>?{&quot;key&quot;:&quot;value&quot;,&quot;foo&quot;:&quot;bar&quot;}</code>。</p>
 <blockquote>
 <p>尽可能使用 <code>module.rules</code>，因为这样可以减少源码中的代码量，并且可以在出错时，更快地调试和定位 loader 中的问题。</p>
-<h4 id="CLI"><a href="#CLI" class="headerlink" title="CLI"></a>CLI</h4><p>你也可以通过<code>CLI</code>使用loader:</p>
 </blockquote>
+<h4 id="CLI"><a href="#CLI" class="headerlink" title="CLI"></a>CLI</h4><p>你也可以通过<code>CLI</code>使用loader:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">webpack --module-bind jade-loader --module-bind &apos;css=style-loader!css-loader&apos;</span><br></pre></td></tr></table></figure>
 <p>这会对<code>.jade</code>文件使用 <code>jade-loader</code>，对 <code>.css</code>文件使用 <code>style-loader</code>和 <code>css-loader</code>。</p>
 <h3 id="Loader特性"><a href="#Loader特性" class="headerlink" title="Loader特性"></a>Loader特性</h3><ul>
@@ -627,7 +627,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-count">20</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
