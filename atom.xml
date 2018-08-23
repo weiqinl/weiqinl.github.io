@@ -434,9 +434,9 @@ $ npm run dev
     </summary>
     
     
-      <category term="hexo" scheme="http://weiqinl.com/tags/hexo/"/>
-    
       <category term="github" scheme="http://weiqinl.com/tags/github/"/>
+    
+      <category term="hexo" scheme="http://weiqinl.com/tags/hexo/"/>
     
       <category term="blog" scheme="http://weiqinl.com/tags/blog/"/>
     
@@ -506,9 +506,9 @@ $ npm run dev
     
       <category term="windows" scheme="http://weiqinl.com/tags/windows/"/>
     
-      <category term="hexo" scheme="http://weiqinl.com/tags/hexo/"/>
-    
       <category term="github" scheme="http://weiqinl.com/tags/github/"/>
+    
+      <category term="hexo" scheme="http://weiqinl.com/tags/hexo/"/>
     
       <category term="blog" scheme="http://weiqinl.com/tags/blog/"/>
     
