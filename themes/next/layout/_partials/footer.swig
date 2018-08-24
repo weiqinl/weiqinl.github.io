@@ -6,6 +6,9 @@
     <i class="fa fa-{{ theme.authoricon }}"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">{{ config.author }}</span>
+  <span>
+    <script src="https://s13.cnzz.com/z_stat.php?id=1274542709&web_id=1274542709" language="JavaScript"></script>
+  </span>
 </div>
 
 {% if theme.copyright %}
